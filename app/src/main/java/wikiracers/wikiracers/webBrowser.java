@@ -7,9 +7,12 @@ package wikiracers.wikiracers;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.KeyEvent;
+//import android.view.Menu;
+//import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 
 /////////////////////////////////////////////
@@ -29,14 +32,34 @@ public class webBrowser extends ActionBarActivity {
 
 
 
+
         //Links Activity Element to refrencable object
         mWebView = (WebView) findViewById(R.id.browser_webView_Window);
-
         //Sets internal JavaScript to ON
         mWebView.getSettings().setJavaScriptEnabled(true);
-
         //Sets Starting URL
         mWebView.loadUrl("http://www.wikipedia.com");
+        mWebView.setWebViewClient(new mWebViewClient());
+
+    }
+
+
+
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack())
+        {
+            mWebView.goBack();
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+    public void webBackButton(View view) {
 
 
 
@@ -44,6 +67,28 @@ public class webBrowser extends ActionBarActivity {
     }
 
 
+    //Removes Web Client default buttons and bounds the browser space to
+    //our WebView activity.
+
+    private class mWebViewClient extends WebViewClient {
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView webview, String url)
+        {
+            webview.loadUrl(url);
+            return true;
+        }
+    }
+
+
+
+
+/////////////// JUNK I DON'T WANT TO REMOVE JUST YET////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -65,4 +110,6 @@ public class webBrowser extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    */
 }
