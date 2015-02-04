@@ -13,6 +13,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 
 
 /////////////////////////////////////////////
@@ -31,8 +32,6 @@ public class webBrowser extends ActionBarActivity {
         setContentView(R.layout.activity_web_browser);
 
 
-
-
         //Links Activity Element to refrencable object
         mWebView = (WebView) findViewById(R.id.browser_webView_Window);
         //Sets internal JavaScript to ON
@@ -41,10 +40,16 @@ public class webBrowser extends ActionBarActivity {
         mWebView.loadUrl("http://www.wikipedia.com");
         mWebView.setWebViewClient(new mWebViewClient());
 
+        Button webBack = (Button)findViewById(R.id.browser_webView_Back_Button);
+        webBack.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                if(mWebView.canGoBack()){
+                    mWebView.goBack();
+                }
+            }
+        });
     }
-
-
-
 
 
     @Override
@@ -59,12 +64,6 @@ public class webBrowser extends ActionBarActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    public void webBackButton(View view) {
-
-
-
-
-    }
 
 
     //Removes Web Client default buttons and bounds the browser space to
