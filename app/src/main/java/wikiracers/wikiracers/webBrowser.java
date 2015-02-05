@@ -14,6 +14,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,7 +69,7 @@ public class webBrowser extends ActionBarActivity {
         });
         // Back button functionality
         //TODO: make sure pressing doesn't increase count (test more)
-        Button webBack = (Button)findViewById(R.id.browser_webView_Back_Button);
+        ImageButton webBack = (ImageButton)findViewById(R.id.browser_webView_Back_Button);
         webBack.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -78,6 +79,16 @@ public class webBrowser extends ActionBarActivity {
                     pageCount--;
                     countText.setText(String.valueOf(pageCount));
                 }
+            }
+        });
+
+        //a settings button
+        //not yet on layout
+        ImageButton settingButton = (ImageButton)findViewById(R.id.settingButton);
+        settingButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "setting button", Toast.LENGTH_SHORT).show();
             }
         });
     }
