@@ -3,9 +3,11 @@
 
     <string name="app_name">WikiRacers</string>
     <string name="Title">WikiRACERS</string>
-    <string name="Build">WikiRACERS -- Build 0.0.3</string>
+    <string name="Build">WikiRACERS -- Build 0.0.4</string>
     <string name="action_settings">Settings</string>
     <string name="Browser_Button_Backtrack">Back Track</string>
     <string name="webview_target_url">TARGET URL GOES HERE</string>
+    <string name="score">0</string>
+    <string name="links_taken_label">Count:</string>
 
 </resources>
