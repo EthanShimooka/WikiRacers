@@ -29,6 +29,8 @@ public class webBrowser extends ActionBarActivity {
     private WebView mWebView;  //New Webview Element
     static int pageCount = 0;
     static String currentURL = "";
+    static String startingURL = "";
+    static String target_URL = "";
     static Boolean backSwitch = true; //acts as a switch for the back button (prevents spamming for -1 counts)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +57,25 @@ public class webBrowser extends ActionBarActivity {
                 if (!url.equals(currentURL)) {
                     currentURL = url;
                     pageCount++;
-                    Toast.makeText(getApplicationContext(), url + " ~ " + String.valueOf(pageCount), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), url + " ~ " + String.valueOf(pageCount) + "target:" + target_URL + " start:" + startingURL, Toast.LENGTH_LONG).show();
                     countText.setText(String.valueOf(pageCount));
                     backSwitch = true;
+                    if (get_page_title(url).equals(target_URL)){
+                        TextView url_target = (TextView) findViewById(R.id.browser_webView_Text);
+                        url_target.setText("Winner");
+                    }
+                    if(startingURL.equals("") && !url.equals("http://en.m.wikipedia.org/wiki/Special:Random")){
+                        mWebView.loadUrl("http://en.wikipedia.org/wiki/Special:Random");
+                        startingURL = url;
+                    }
+                    else if(target_URL.equals("") && !url.equals("http://en.m.wikipedia.org/wiki/Special:Random")){
+                        TextView url_target;
+                        url_target = (TextView)findViewById(R.id.browser_webView_Text);
+                        url_target.setText(get_page_title(url));
+                        target_URL = get_page_title(url);
+                        mWebView.loadUrl(startingURL);
+                        pageCount = 0;
+                    }
                 }
             }
             @Override
@@ -67,7 +85,6 @@ public class webBrowser extends ActionBarActivity {
             }
         });
         // Back button functionality
-        //TODO: make sure pressing doesn't increase count (test more)
         Button webBack = (Button)findViewById(R.id.browser_webView_Back_Button);
         webBack.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -75,8 +92,6 @@ public class webBrowser extends ActionBarActivity {
                 if(mWebView.canGoBack() && backSwitch){
                     backSwitch = false;
                     mWebView.goBack();
-                    pageCount--;
-                    countText.setText(String.valueOf(pageCount));
                 }
             }
         });
@@ -95,6 +110,13 @@ public class webBrowser extends ActionBarActivity {
         }
     }
 
+
+    public String get_page_title(String url){
+        //Gets everything after the final / in the Url aka the page_title
+        int get_last_slash = url.lastIndexOf('/');
+        String page_title = url.substring(get_last_slash+1);
+        return page_title;
+    }
 
 
 
