@@ -36,7 +36,8 @@ public class webBrowser extends Activity {
     static String startingURL = "";
     static String target_URL = "";
     static List<String> list_URL = new ArrayList<String>();
-
+    static Boolean gameStart = false;
+    static Boolean gameRun = false;
     static Boolean backSwitch = true; //acts as a switch for the back button (prevents spamming for -1 counts)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,9 @@ public class webBrowser extends Activity {
                 super.onPageFinished(view, url);
                 if (!url.equals(currentURL)) {
                     currentURL = url;
-                    pageCount++;
+                    if(gameRun) {
+                        pageCount++;
+                    }
                     Toast.makeText(getApplicationContext(), url + " ~ " + String.valueOf(pageCount) + "target:" + target_URL + " start:" + startingURL, Toast.LENGTH_LONG).show();
                     countText.setText(String.valueOf(pageCount));
                     backSwitch = true;
@@ -75,6 +78,7 @@ public class webBrowser extends Activity {
                             Log.d("victory", list_URL.get(i));
                         }
                         Log.d("path", "url: " + url);
+                        gameRun = gameStart = false; //allows player to browse around post game without messing with stats
                     }
                     if(startingURL.equals("") && !url.equals("http://en.m.wikipedia.org/wiki/Special:Random")){
                         mWebView.loadUrl("http://en.m.wikipedia.org/wiki/Special:Random");
@@ -87,7 +91,9 @@ public class webBrowser extends Activity {
                         target_URL = get_page_title(url);
                         mWebView.loadUrl(startingURL);
                         pageCount = 0;
-                    }else{
+                        gameStart = gameRun = true;
+                    }else if (gameStart){
+                        //Todo: test this (play the game all the way through)
                         list_URL.add(url);
                     }
                 }
