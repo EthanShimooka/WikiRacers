@@ -65,7 +65,7 @@ public class webBrowser extends ActionBarActivity {
                         url_target.setText("Winner");
                     }
                     if(startingURL.equals("") && !url.equals("http://en.m.wikipedia.org/wiki/Special:Random")){
-                        mWebView.loadUrl("http://en.wikipedia.org/wiki/Special:Random");
+                        mWebView.loadUrl("http://en.m.wikipedia.org/wiki/Special:Random");
                         startingURL = url;
                     }
                     else if(target_URL.equals("") && !url.equals("http://en.m.wikipedia.org/wiki/Special:Random")){
