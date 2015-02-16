@@ -43,6 +43,7 @@ public class menuActivity extends Activity {
             public void onClick (View v){
 
                 //Call to new browser Activity, when button is pressed.
+                //Todo: fix error regarding pressing back arrow button (<|) when playing game
             startActivity(new Intent(getApplicationContext(), webBrowser.class));
             }
         });
