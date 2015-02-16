@@ -12,13 +12,13 @@ import android.widget.Button;
  * Project : WikiRacers
  * =========================================
  *
- * TODO: PLEASE READ OVER THE COMMENTS FOR EACH CLASS
+ * TODO: PLEASE READ OVER THE COMMENTS FOR EACH CLASS METHOD
  *
  * Messages:
  *
  * 2/15/2015
  *
- * Hey guys, Ethan Here, I have made the base structure for our menu system. As you can see, they
+ * Hey guys, Ethan here, I have made the base structure for our menu system. As you can see, they
  * are not all fragments like originally planned. There is a few reasons. For one, fragments
  * should be used to display small menu's and objects within an activity, rather than running
  * all activity-like fragments parallel with each other. I was having this conversation with my
