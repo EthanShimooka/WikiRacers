@@ -10,12 +10,16 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 //import android.view.Menu;
 //import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /////////////////////////////////////////////
@@ -31,7 +35,12 @@ public class webBrowser extends Activity {
     static String currentURL = "";
     static String startingURL = "";
     static String target_URL = "";
-    static Boolean backSwitch = true; //acts as a switch for the back button (prevents spamming for -1 counts)
+    static String target_URL_full = "";
+    static List<String> list_URL = new ArrayList<String>();
+    static Boolean gameStart = false;
+    static Boolean gameRun = false; // might be the same as gameStart
+    static Boolean peekMode = false; // toggles when the user is playing or looking at target
+    static Boolean backSwitch = true; //acts as a switch for the back button (prevents spamming)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,18 +63,31 @@ public class webBrowser extends Activity {
             @Override
             public void onPageFinished(WebView view, String url){
                 super.onPageFinished(view, url);
+                if(peekMode){
+
+                }
+                else{backSwitch = true;
                 if (!url.equals(currentURL)) {
                     currentURL = url;
-                    pageCount++;
-                    Toast.makeText(getApplicationContext(), url + " ~ " + String.valueOf(pageCount) + "target:" + target_URL + " start:" + startingURL, Toast.LENGTH_LONG).show();
+                    if(gameRun) {
+                        pageCount++;
+                    }
+                    Log.d("game", url + " ~ " + String.valueOf(pageCount) + "target:" + target_URL + " start:" + startingURL);
                     countText.setText(String.valueOf(pageCount));
                     backSwitch = true;
                     if (get_page_title(url).equals(target_URL)){
+                        list_URL.add(url);
                         TextView url_target = (TextView) findViewById(R.id.browser_webView_Text);
                         url_target.setText("Winner");
+                        int i = 0;
+                        for (;i<list_URL.size();++i){
+                            Log.d("victory", list_URL.get(i));
+                        }
+                        Log.d("path", "url: " + url);
+                        gameRun = gameStart = false; //allows player to browse around post game without messing with stats
                     }
                     if(startingURL.equals("") && !url.equals("http://en.m.wikipedia.org/wiki/Special:Random")){
-                        mWebView.loadUrl("http://en.wikipedia.org/wiki/Special:Random");
+                        mWebView.loadUrl("http://en.m.wikipedia.org/wiki/Special:Random");
                         startingURL = url;
                     }
                     else if(target_URL.equals("") && !url.equals("http://en.m.wikipedia.org/wiki/Special:Random")){
@@ -73,8 +95,14 @@ public class webBrowser extends Activity {
                         url_target = (TextView)findViewById(R.id.browser_webView_Text);
                         url_target.setText(get_page_title(url));
                         target_URL = get_page_title(url);
+                        target_URL_full = url;
                         mWebView.loadUrl(startingURL);
                         pageCount = 0;
+                        gameStart = gameRun = true;
+                    }else if (gameStart){
+                        //Todo: test this (play the game all the way through)
+                        list_URL.add(url);
+                    }
                     }
                 }
             }
@@ -85,27 +113,49 @@ public class webBrowser extends Activity {
             }
         });
         // Back button functionality
-        Button webBack = (Button)findViewById(R.id.browser_webView_Back_Button);
-        webBack.setOnClickListener(new View.OnClickListener(){
+        final Button webBack = (Button)findViewById(R.id.browser_webView_Back_Button);
+        final TextView targetPageText = (TextView)findViewById(R.id.browser_webView_Text);
+        View.OnClickListener listen = new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
-                if(mWebView.canGoBack() && backSwitch){
-                    backSwitch = false;
-                    mWebView.goBack();
+            public void onClick(View view){
+                if (view == webBack){
+                    Log.d("game", "back clicked");
+                    if(backSwitch){Log.d("game","backswitch true");}
+                    if(mWebView.canGoBack()){Log.d("game","GoBack true");}
+                    if(mWebView.canGoBack() && backSwitch){
+                        Log.d("game", "going back");
+                        backSwitch = false;
+                        mWebView.goBack();
+                    }
+                }
+                else if (view == targetPageText){
+                    if(peekMode){
+                        peekMode = false;
+                        backSwitch = true;
+                        mWebView.goBack();
+                    }else {
+                        Log.d("game", "text clicked");
+                        peekMode = true;
+                        mWebView.loadUrl(target_URL_full);
+                    }
                 }
             }
-        });
+        };
+        webBack.setOnClickListener(listen);
+        targetPageText.setOnClickListener(listen);
     }
 
     //Removes Web Client default buttons and bounds the browser space to
     //our WebView activity.
 
     private class mWebViewClient extends WebViewClient {
-
         @Override
         public boolean shouldOverrideUrlLoading(WebView webview, String url)
         {
-            webview.loadUrl(url);
+            Log.d("game","override view loading");
+            if (!peekMode) {
+                webview.loadUrl(url);
+            }
             return true;
         }
     }
