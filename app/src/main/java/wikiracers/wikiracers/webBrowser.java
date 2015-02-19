@@ -58,7 +58,6 @@ public class webBrowser extends Activity {
 
             //counts when a page is loaded completely
             //used instead of onPageStarted for counting reasons (redirections, etc.)
-            //TODO: make sure the startup doesn't start past 0
             //TODO: make sure the count doesn't go up when page load fails
             @Override
             public void onPageFinished(WebView view, String url){
@@ -97,7 +96,7 @@ public class webBrowser extends Activity {
                         target_URL = get_page_title(url);
                         target_URL_full = url;
                         mWebView.loadUrl(startingURL);
-                        pageCount = 0;
+                        pageCount = -1;
                         gameStart = gameRun = true;
                     }else if (gameStart){
                         //Todo: test this (play the game all the way through)
@@ -119,13 +118,21 @@ public class webBrowser extends Activity {
             @Override
             public void onClick(View view){
                 if (view == webBack){
-                    Log.d("game", "back clicked");
-                    if(backSwitch){Log.d("game","backswitch true");}
-                    if(mWebView.canGoBack()){Log.d("game","GoBack true");}
-                    if(mWebView.canGoBack() && backSwitch){
-                        Log.d("game", "going back");
-                        backSwitch = false;
-                        mWebView.goBack();
+                    if (peekMode){
+                        targetPageText.performClick();
+                    }else {
+                        Log.d("game", "back clicked");
+                        if (backSwitch) {
+                            Log.d("game", "backswitch true");
+                        }
+                        if (mWebView.canGoBack()) {
+                            Log.d("game", "GoBack true");
+                        }
+                        if (mWebView.canGoBack() && backSwitch) {
+                            Log.d("game", "going back");
+                            backSwitch = false;
+                            mWebView.goBack();
+                        }
                     }
                 }
                 else if (view == targetPageText){
