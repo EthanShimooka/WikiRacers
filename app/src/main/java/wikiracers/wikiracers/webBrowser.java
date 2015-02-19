@@ -45,7 +45,6 @@ public class webBrowser extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_browser);
-        final TextView countText = (TextView) findViewById(R.id.textView2);
 
 
         //Links Activity Element to refrencable object
@@ -62,48 +61,8 @@ public class webBrowser extends Activity {
             @Override
             public void onPageFinished(WebView view, String url){
                 super.onPageFinished(view, url);
-                if(peekMode){
+                finishedPage(view, url);
 
-                }
-                else{backSwitch = true;
-                if (!url.equals(currentURL)) {
-                    currentURL = url;
-                    if(gameRun) {
-                        pageCount++;
-                    }
-                    Log.d("game", url + " ~ " + String.valueOf(pageCount) + "target:" + target_URL + " start:" + startingURL);
-                    countText.setText(String.valueOf(pageCount));
-                    backSwitch = true;
-                    if (get_page_title(url).equals(target_URL)){
-                        list_URL.add(url);
-                        TextView url_target = (TextView) findViewById(R.id.browser_webView_Text);
-                        url_target.setText("Winner");
-                        int i = 0;
-                        for (;i<list_URL.size();++i){
-                            Log.d("victory", list_URL.get(i));
-                        }
-                        Log.d("path", "url: " + url);
-                        gameRun = gameStart = false; //allows player to browse around post game without messing with stats
-                    }
-                    if(startingURL.equals("") && !url.equals("http://en.m.wikipedia.org/wiki/Special:Random")){
-                        mWebView.loadUrl("http://en.m.wikipedia.org/wiki/Special:Random");
-                        startingURL = url;
-                    }
-                    else if(target_URL.equals("") && !url.equals("http://en.m.wikipedia.org/wiki/Special:Random")){
-                        TextView url_target;
-                        url_target = (TextView)findViewById(R.id.browser_webView_Text);
-                        url_target.setText(get_page_title(url));
-                        target_URL = get_page_title(url);
-                        target_URL_full = url;
-                        mWebView.loadUrl(startingURL);
-                        pageCount = -1;
-                        gameStart = gameRun = true;
-                    }else if (gameStart){
-                        //Todo: test this (play the game all the way through)
-                        list_URL.add(url);
-                    }
-                    }
-                }
             }
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon){
@@ -111,6 +70,7 @@ public class webBrowser extends Activity {
                 super.onPageStarted(view,url,favicon);
             }
         });
+
         // Back button functionality
         final Button webBack = (Button)findViewById(R.id.browser_webView_Back_Button);
         final TextView targetPageText = (TextView)findViewById(R.id.browser_webView_Text);
@@ -167,6 +127,51 @@ public class webBrowser extends Activity {
         }
     }
 
+
+    public void finishedPage(WebView view, String url){
+        final TextView countText = (TextView) findViewById(R.id.textView2);
+        if(peekMode){
+
+        }
+        else{backSwitch = true;
+            if (!url.equals(currentURL)) {
+                currentURL = url;
+                if(gameRun) {
+                    pageCount++;
+                }
+                Log.d("game", url + " ~ " + String.valueOf(pageCount) + "target:" + target_URL + " start:" + startingURL);
+                countText.setText(String.valueOf(pageCount));
+                backSwitch = true;
+                if (get_page_title(url).equals(target_URL)){
+                    list_URL.add(url);
+                    TextView url_target = (TextView) findViewById(R.id.browser_webView_Text);
+                    url_target.setText("Winner");
+                    int i = 0;
+                    for (;i<list_URL.size();++i){
+                        Log.d("victory", list_URL.get(i));
+                    }
+                    Log.d("path", "url: " + url);
+                    gameRun = gameStart = false; //allows player to browse around post game without messing with stats
+                }
+                if(startingURL.equals("") && !url.equals("http://en.m.wikipedia.org/wiki/Special:Random")){
+                    mWebView.loadUrl("http://en.m.wikipedia.org/wiki/Special:Random");
+                    startingURL = url;
+                }
+                else if(target_URL.equals("") && !url.equals("http://en.m.wikipedia.org/wiki/Special:Random")){
+                    TextView url_target;
+                    url_target = (TextView)findViewById(R.id.browser_webView_Text);
+                    url_target.setText(get_page_title(url));
+                    target_URL = get_page_title(url);
+                    target_URL_full = url;
+                    mWebView.loadUrl(startingURL);
+                    pageCount = -1;
+                    gameStart = gameRun = true;
+                }else if (gameStart){
+                    list_URL.add(url);
+                }
+            }
+        }
+    }
 
     public String get_page_title(String url){
         //Gets everything after the final / in the Url aka the page_title
