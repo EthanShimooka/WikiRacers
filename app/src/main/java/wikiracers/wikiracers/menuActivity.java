@@ -38,31 +38,16 @@ public class menuActivity extends Activity {
         setContentView(R.layout.activity_menu_layout);
 
 // Enable Local Datastore.
-        Parse.enableLocalDatastore(getApplicationContext());
+        Parse.enableLocalDatastore(this);
 
         Parse.initialize(this, "pUt8rvMtRcdgXu3PMpyLyjbxkTIA4xEeVEJ4C1hp", "P7dA3hQGSO8NpuCODjgzJFH1F7ADn487syS55FBq");
 
-// TODO: delete this after done testing with db
+
         ParseObject testObject = new ParseObject("TestObject");
         testObject.put("foo", "bar");
         testObject.saveInBackground();
 
-        final Button menuButton = (Button) findViewById(R.id.menu_button);
-        final Button subscribeButton = (Button) findViewById(R.id.register_button);
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (view == menuButton){
-                    startActivity(new Intent(getApplicationContext(), webBrowser.class));
-                }
-                else if(view == subscribeButton){
-                    startActivity(new Intent(getApplicationContext(), Register.class));
-                }
-            }
-        };
-        menuButton.setOnClickListener(listener);
-        subscribeButton.setOnClickListener(listener);
-        /*
+        Button menuButton = (Button) findViewById(R.id.menu_button);
         menuButton.setOnClickListener(new View.OnClickListener() {
             public void onClick (View v){
 
@@ -71,7 +56,6 @@ public class menuActivity extends Activity {
             startActivity(new Intent(getApplicationContext(), webBrowser.class));
             }
         });
-        */
     }
 
 
