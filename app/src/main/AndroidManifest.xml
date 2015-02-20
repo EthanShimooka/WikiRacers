@@ -16,6 +16,8 @@
         />
         <activity android:name=".settingsPage"/>
         <activity android:name=".registerPage"/>
+        <activity android:name=".userPage"/>
+        <activity android:name=".loginPage"/>
 
         <activity
             android:name=".menuActivity"

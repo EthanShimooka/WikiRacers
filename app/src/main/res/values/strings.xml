@@ -17,5 +17,9 @@
     <string name="password_text">Password:</string>
     <string name="create_text">Create</string>
     <string name="register_page_title_text">Register Page</string>
+    <string name="logout_button_text">Login Out</string>
+    <string name="register_button_text">Register</string>
+    <string name="login_button_text">Login</string>
+    <string name="login_page_title">Login Page</string>
 
 </resources>
