@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.parse.Parse;
+import com.parse.ParseObject;
+
 /**
  * =========================================
  * Authored by Ethan , 2/15/2015
@@ -35,8 +38,15 @@ public class menuActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_layout);
 
+// Enable Local Datastore.
+        Parse.enableLocalDatastore(this);
+
+        Parse.initialize(this, "pUt8rvMtRcdgXu3PMpyLyjbxkTIA4xEeVEJ4C1hp", "P7dA3hQGSO8NpuCODjgzJFH1F7ADn487syS55FBq");
 
 
+        ParseObject testObject = new ParseObject("TestObject");
+        testObject.put("foo", "bar");
+        testObject.saveInBackground();
 
         Button menuButton = (Button) findViewById(R.id.menu_button);
         menuButton.setOnClickListener(new View.OnClickListener() {
