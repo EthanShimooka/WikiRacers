@@ -44,9 +44,9 @@ public class menuActivity extends Activity {
         Parse.initialize(this, "pUt8rvMtRcdgXu3PMpyLyjbxkTIA4xEeVEJ4C1hp", "P7dA3hQGSO8NpuCODjgzJFH1F7ADn487syS55FBq");
 
 
-        ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");
-        testObject.saveInBackground();
+        //ParseObject testObject = new ParseObject("TestObject");
+        //testObject.put("foo", "bar");
+        //testObject.saveInBackground();
 
         Button menuButton = (Button) findViewById(R.id.menu_button);
         menuButton.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +55,16 @@ public class menuActivity extends Activity {
                 //Call to new browser Activity, when button is pressed.
                 //Todo: fix error regarding pressing back arrow button (<|) when playing game
             startActivity(new Intent(getApplicationContext(), webBrowser.class));
+            }
+        });
+
+        Button settingButton = (Button) findViewById(R.id.settings_button);
+        settingButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View v){
+
+                //Call to new browser Activity, when button is pressed.
+                //Todo: fix error regarding pressing back arrow button (<|) when playing game
+                startActivity(new Intent(getApplicationContext(), settingsPage.class));
             }
         });
     }
