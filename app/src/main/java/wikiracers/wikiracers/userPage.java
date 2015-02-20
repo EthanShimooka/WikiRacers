@@ -17,10 +17,6 @@ import android.widget.TextView;
 import com.parse.ParseUser;
 
 public class userPage extends Activity {
-    private TextView usernameText = null;
-    private TextView nameText = null;
-    private TextView emailText = null;
-    private TextView phoneText = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +30,16 @@ public class userPage extends Activity {
         String phone = currentUser.getString("phone");
 
         LinearLayout lView = (LinearLayout)findViewById(R.id.user_data);
-        usernameText = new TextView(userPage.this);
+        TextView usernameText = new TextView(userPage.this);
         usernameText.setText(username);
         lView.addView(usernameText);
-        nameText = new TextView(userPage.this);
+        TextView nameText = new TextView(userPage.this);
         nameText.setText(name);
         lView.addView(nameText);
-        emailText = new TextView(userPage.this);
+        TextView emailText = new TextView(userPage.this);
         emailText.setText(email);
         lView.addView(emailText);
-        phoneText = new TextView(userPage.this);
+        TextView phoneText = new TextView(userPage.this);
         phoneText.setText(phone);
         lView.addView(phoneText);
 
