@@ -13,6 +13,9 @@
         <activity android:name=".webBrowser"
                   android:label="@string/app_name"
          />
+        <activity android:name=".Register"
+                  android:label="Wikiracers"
+        />
 
         <activity
             android:name=".menuActivity"
