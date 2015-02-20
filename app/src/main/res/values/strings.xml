@@ -10,5 +10,12 @@
     <string name="menu_button_share">Share</string>
     <string name="menu_button_newgame">Start Game</string>
     <string name="menu_button_settings">Settings</string>
+    <string name="username_text">Username:</string>
+    <string name="email_text">Email:</string>
+    <string name="name_text">Name:</string>
+    <string name="phone_text">Phone Number:</string>
+    <string name="password_text">Password:</string>
+    <string name="create_text">Create</string>
+    <string name="register_page_title_text">Register Page</string>
 
 </resources>

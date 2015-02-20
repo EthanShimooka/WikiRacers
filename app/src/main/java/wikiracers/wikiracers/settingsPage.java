@@ -2,6 +2,7 @@ package wikiracers.wikiracers;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Pair;
@@ -32,6 +33,16 @@ public class settingsPage extends Activity {
         username = (EditText) findViewById(R.id.editText1);
         password = (EditText) findViewById(R.id.editText2);
         login = (Button) findViewById(R.id.button1);
+
+        Button registerButton = (Button) findViewById(R.id.register_button);
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View v){
+
+                //Call to new browser Activity, when button is pressed.
+                //Todo: fix error regarding pressing back arrow button (<|) when playing game
+                startActivity(new Intent(getApplicationContext(), registerPage.class));
+            }
+        });
     }
 
     public void login(View view) {
