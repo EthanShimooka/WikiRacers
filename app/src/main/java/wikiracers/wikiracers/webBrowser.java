@@ -6,17 +6,21 @@
 package wikiracers.wikiracers;
 
 import android.app.Activity;
+
 import android.graphics.Bitmap;
 import android.os.Bundle;
 //import android.view.Menu;
 //import android.view.MenuItem;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +30,9 @@ import java.util.List;
 //test with git
 
 
-//webBrowser class
+//WebBrowser class
 
-public class webBrowser extends Activity {
+public class WebBrowser extends Activity {
 
     private WebView mWebView;  //New Webview Element
     static int pageCount = 0;
@@ -60,6 +64,7 @@ public class webBrowser extends Activity {
             //used instead of onPageStarted for counting reasons (redirections, etc.)
             //TODO: make sure the startup doesn't start past 0
             //TODO: make sure the count doesn't go up when page load fails
+
             @Override
             public void onPageFinished(WebView view, String url){
                 super.onPageFinished(view, url);
@@ -143,7 +148,92 @@ public class webBrowser extends Activity {
         };
         webBack.setOnClickListener(listen);
         targetPageText.setOnClickListener(listen);
+
+
+
+        //Fragment for Web browser menu
+        ////////////////////////////////////////////////
+        //bootFrag();
+
+        loadPop();
+
+
+
     }
+
+
+
+    private void loadPop(){
+
+
+        final Button btnOpenPopup = (Button)findViewById(R.id.openpopup);
+        btnOpenPopup.setOnClickListener(new Button.OnClickListener(){
+
+            @Override
+            public void onClick(View arg0) {
+                LayoutInflater layoutInflater
+                        = (LayoutInflater)getBaseContext()
+                        .getSystemService(LAYOUT_INFLATER_SERVICE);
+                View popupView = layoutInflater.inflate(R.layout.popup, null);
+
+
+
+                final PopupWindow popupWindow = new PopupWindow(
+                        popupView,
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                Button btnDismiss = (Button)popupView.findViewById(R.id.dismiss);
+                btnDismiss.setOnClickListener(new Button.OnClickListener(){
+
+                    @Override
+                    public void onClick(View v) {
+                        // TODO Auto-generated method stub
+                        popupWindow.dismiss();
+                    }});
+
+
+                //can be any resource apparently
+                popupWindow.showAtLocation(findViewById(R.id.browser_webView_Text) ,
+                        Gravity.CENTER, 0, 0);
+            }});
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+    private void bootFrag ( ) {
+        FragmentManager fragmentManager = getFragmentManager();
+       final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+      final  WebBrowserMenuFrag webBrowserMenuFrag = new WebBrowserMenuFrag();
+        final Button pauseButton = (Button)findViewById(R.id.browser_pause);
+        View.OnClickListener listen2 = new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                if (view == pauseButton){
+
+                    fragmentTransaction.replace(android.R.id.content, webBrowserMenuFrag);
+                }
+            }};
+        pauseButton.setOnClickListener(listen2);
+
+        fragmentTransaction.commit();
+
+    }
+
+*/
 
     //Removes Web Client default buttons and bounds the browser space to
     //our WebView activity.
@@ -152,7 +242,7 @@ public class webBrowser extends Activity {
         @Override
         public boolean shouldOverrideUrlLoading(WebView webview, String url)
         {
-            Log.d("game","override view loading");
+            Log.d("game", "override view loading");
             if (!peekMode) {
                 webview.loadUrl(url);
             }
@@ -167,5 +257,9 @@ public class webBrowser extends Activity {
         String page_title = url.substring(get_last_slash+1);
         return page_title;
     }
+
+
+
+
 
 }
