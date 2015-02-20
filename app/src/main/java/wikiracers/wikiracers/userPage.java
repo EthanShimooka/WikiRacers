@@ -11,15 +11,41 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.parse.ParseUser;
 
 public class userPage extends Activity {
+    private TextView usernameText = null;
+    private TextView nameText = null;
+    private TextView emailText = null;
+    private TextView phoneText = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_page);
+
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        String username = currentUser.getString("username");
+        String name = currentUser.getString("name");
+        String email = currentUser.getString("email");
+        String phone = currentUser.getString("phone");
+
+        LinearLayout lView = (LinearLayout)findViewById(R.id.user_data);
+        usernameText = new TextView(userPage.this);
+        usernameText.setText(username);
+        lView.addView(usernameText);
+        nameText = new TextView(userPage.this);
+        nameText.setText(name);
+        lView.addView(nameText);
+        emailText = new TextView(userPage.this);
+        emailText.setText(email);
+        lView.addView(emailText);
+        phoneText = new TextView(userPage.this);
+        phoneText.setText(phone);
+        lView.addView(phoneText);
 
         findViewById(R.id.logout_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
