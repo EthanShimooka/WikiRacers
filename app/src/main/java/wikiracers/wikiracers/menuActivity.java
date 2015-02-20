@@ -53,7 +53,7 @@ public class menuActivity extends Activity {
 
                 //Call to new browser Activity, when button is pressed.
                 //Todo: fix error regarding pressing back arrow button (<|) when playing game
-            startActivity(new Intent(getApplicationContext(), webBrowser.class));
+                startActivity(new Intent(getApplicationContext(), webBrowser.class));
             }
         });
 

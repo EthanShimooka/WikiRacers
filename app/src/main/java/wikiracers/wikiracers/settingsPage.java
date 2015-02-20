@@ -32,8 +32,9 @@ public class settingsPage extends Activity {
     public void login(View view) {
         String name = username.getText().toString();
         String pass = password.getText().toString();
-        ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", name);
+        ParseObject testObject = new ParseObject("User");
+        testObject.put("username", name);
+        testObject.put("password", pass);
         testObject.saveInBackground();
 
     }
