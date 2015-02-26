@@ -72,42 +72,42 @@ public class WebBrowser extends Activity {
 
                 }
                 else{backSwitch = true;
-                if (!url.equals(currentURL)) {
-                    currentURL = url;
-                    if(gameRun) {
-                        pageCount++;
-                    }
-                    Log.d("game", url + " ~ " + String.valueOf(pageCount) + "target:" + target_URL + " start:" + startingURL);
-                    countText.setText(String.valueOf(pageCount));
-                    backSwitch = true;
-                    if (get_page_title(url).equals(target_URL)){
-                        list_URL.add(url);
-                        TextView url_target = (TextView) findViewById(R.id.browser_webView_Text);
-                        url_target.setText("Winner");
-                        int i = 0;
-                        for (;i<list_URL.size();++i){
-                            Log.d("victory", list_URL.get(i));
+                    if (!url.equals(currentURL)) {
+                        currentURL = url;
+                        if(gameRun) {
+                            pageCount++;
                         }
-                        Log.d("path", "url: " + url);
-                        gameRun = gameStart = false; //allows player to browse around post game without messing with stats
-                    }
-                    if(startingURL.equals("") && !url.equals("http://en.m.wikipedia.org/wiki/Special:Random")){
-                        mWebView.loadUrl("http://en.m.wikipedia.org/wiki/Special:Random");
-                        startingURL = url;
-                    }
-                    else if(target_URL.equals("") && !url.equals("http://en.m.wikipedia.org/wiki/Special:Random")){
-                        TextView url_target;
-                        url_target = (TextView)findViewById(R.id.browser_webView_Text);
-                        url_target.setText(get_page_title(url));
-                        target_URL = get_page_title(url);
-                        target_URL_full = url;
-                        mWebView.loadUrl(startingURL);
-                        pageCount = 0;
-                        gameStart = gameRun = true;
-                    }else if (gameStart){
-                        //Todo: test this (play the game all the way through)
-                        list_URL.add(url);
-                    }
+                        Log.d("game", url + " ~ " + String.valueOf(pageCount) + "target:" + target_URL + " start:" + startingURL);
+                        countText.setText(String.valueOf(pageCount));
+                        backSwitch = true;
+                        if (get_page_title(url).equals(target_URL)){
+                            list_URL.add(url);
+                            TextView url_target = (TextView) findViewById(R.id.browser_webView_Text);
+                            url_target.setText("Winner");
+                            int i = 0;
+                            for (;i<list_URL.size();++i){
+                                Log.d("victory", list_URL.get(i));
+                            }
+                            Log.d("path", "url: " + url);
+                            gameRun = gameStart = false; //allows player to browse around post game without messing with stats
+                        }
+                        if(startingURL.equals("") && !url.equals("http://en.m.wikipedia.org/wiki/Special:Random")){
+                            mWebView.loadUrl("http://en.m.wikipedia.org/wiki/Special:Random");
+                            startingURL = url;
+                        }
+                        else if(target_URL.equals("") && !url.equals("http://en.m.wikipedia.org/wiki/Special:Random")){
+                            TextView url_target;
+                            url_target = (TextView)findViewById(R.id.browser_webView_Text);
+                            url_target.setText(get_page_title(url));
+                            target_URL = get_page_title(url);
+                            target_URL_full = url;
+                            mWebView.loadUrl(startingURL);
+                            pageCount = 0;
+                            gameStart = gameRun = true;
+                        }else if (gameStart){
+                            //Todo: test this (play the game all the way through)
+                            list_URL.add(url);
+                        }
                     }
                 }
             }

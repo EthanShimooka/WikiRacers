@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import com.parse.Parse;
+
 
 /**
  * =========================================
@@ -12,13 +14,13 @@ import android.widget.Button;
  * Project : WikiRacers
  * =========================================
  *
- * TODO: PLEASE READ OVER THE COMMENTS FOR EACH CLASS METHOD
+ * TODO: PLEASE READ OVER THE COMMENTS FOR EACH CLASS
  *
  * Messages:
  *
  * 2/15/2015
  *
- * Hey guys, Ethan here, I have made the base structure for our menu system. As you can see, they
+ * Hey guys, Ethan Here, I have made the base structure for our menu system. As you can see, they
  * are not all fragments like originally planned. There is a few reasons. For one, fragments
  * should be used to display small menu's and objects within an activity, rather than running
  * all activity-like fragments parallel with each other. I was having this conversation with my
@@ -35,8 +37,15 @@ public class MenuActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_layout);
 
+// Enable Local Datastore.
+        Parse.enableLocalDatastore(this);
+
+        Parse.initialize(this, "pUt8rvMtRcdgXu3PMpyLyjbxkTIA4xEeVEJ4C1hp", "P7dA3hQGSO8NpuCODjgzJFH1F7ADn487syS55FBq");
 
 
+        //ParseObject testObject = new ParseObject("TestObject");
+        //testObject.put("foo", "bar");
+        //testObject.saveInBackground();
 
         Button menuButton = (Button) findViewById(R.id.menu_button);
         menuButton.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +53,17 @@ public class MenuActivity extends Activity {
 
                 //Call to new browser Activity, when button is pressed.
                 //Todo: fix error regarding pressing back arrow button (<|) when playing game
-            startActivity(new Intent(getApplicationContext(), WebBrowser.class));
+                startActivity(new Intent(getApplicationContext(), WebBrowser.class));
+            }
+        });
+
+        Button settingButton = (Button) findViewById(R.id.settings_button);
+        settingButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View v){
+
+                //Call to new browser Activity, when button is pressed.
+                //Todo: fix error regarding pressing back arrow button (<|) when playing game
+                startActivity(new Intent(getApplicationContext(), SettingsPage.class));
             }
         });
     }
