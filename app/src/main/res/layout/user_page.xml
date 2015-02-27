@@ -8,30 +8,173 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <LinearLayout
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/user_data"
-        android:orientation="vertical"
-        android:layout_centerHorizontal="true">
-
-        </LinearLayout>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/username"
+        android:text="@string/original_username_text"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/email"
+        android:text="@string/original_email_text"/>
 
     <Button
         android:id="@+id/logout_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="94dp"
-        android:layout_below="@+id/user_data"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:text="@string/logout_button_text" />
 
-    <Button
-        android:id="@+id/main_menu_button"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/username"
+        android:id="@+id/name"
+        android:text="@string/original_name_string"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/email"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/logout_button"
-        android:text="@string/main_menu_button_text" />
+        android:id="@+id/phone"
+        android:text="@string/original_phone_string"/>
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:stretchColumns="*"
+        android:id="@+id/table_data"
+        android:background="#ff1dff31">
+
+        <TableRow>
+            <TextView
+                android:padding="3dip"
+                android:layout_margin="2dp"
+                android:background="#000000"/>
+            <TextView
+                android:text="@string/user_text"
+                android:gravity="center"
+                android:padding="3dip"
+                android:layout_margin="2dp"
+                android:background="#000000"/>
+            <TextView
+                android:text="@string/world_average_text"
+                android:gravity="end"
+                android:padding="3dip"
+                android:layout_margin="2dp"
+                android:background="#000000"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="@string/wins_text"
+                android:padding="3dip"
+                android:layout_margin="2dp"
+                android:background="#000000"/>
+            <TextView
+                android:text="@string/dot_dot_dot"
+                android:gravity="center"
+                android:padding="3dip"
+                android:layout_margin="2dp"
+                android:background="#000000"/>
+            <TextView
+                android:text="@string/dot_dot_dot"
+                android:gravity="end"
+                android:padding="3dip"
+                android:layout_margin="2dp"
+                android:background="#000000"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="@string/loses_text"
+                android:padding="3dip"
+                android:layout_margin="2dp"
+                android:background="#000000"/>
+            <TextView
+                android:text="@string/dot_dot_dot"
+                android:gravity="center"
+                android:padding="3dip"
+                android:layout_margin="2dp"
+                android:background="#000000"/>
+            <TextView
+                android:text="@string/dot_dot_dot"
+                android:gravity="end"
+                android:padding="3dip"
+                android:layout_margin="2dp"
+                android:background="#000000"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="@string/attempts_text"
+                android:padding="3dip"
+                android:layout_margin="2dp"
+                android:background="#000000"/>
+            <TextView
+                android:text="@string/dot_dot_dot"
+                android:gravity="center"
+                android:padding="3dip"
+                android:layout_margin="2dp"
+                android:background="#000000"/>
+            <TextView
+                android:text="@string/dot_dot_dot"
+                android:gravity="end"
+                android:padding="3dip"
+                android:layout_margin="2dp"
+                android:background="#000000"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="@string/WLR_text"
+                android:padding="3dip"
+                android:layout_margin="2dp"
+                android:background="#000000"/>
+            <TextView
+                android:text="@string/dot_dot_dot"
+                android:gravity="center"
+                android:padding="3dip"
+                android:layout_margin="2dp"
+                android:background="#000000"/>
+            <TextView
+                android:text="@string/dot_dot_dot"
+                android:gravity="end"
+                android:padding="3dip"
+                android:layout_margin="2dp"
+                android:background="#000000"/>
+        </TableRow>
+    </TableLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/table_data"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:id="@+id/add_friend_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:layout_marginEnd="30dp"
+            android:text="@string/add_friend_text" />
+        <Button
+            android:id="@+id/main_menu_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/add_friend_button"
+            android:layout_toEndOf="@+id/add_friend_button"
+            android:text="@string/main_menu_button_text" />
+
+        </RelativeLayout>
 
 </RelativeLayout>

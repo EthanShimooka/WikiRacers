@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:text="@string/Build"
         android:id="@+id/browser_webView_Header"
-        android:textSize="8sp"
+        android:textSize="12sp"
         />
 
 
