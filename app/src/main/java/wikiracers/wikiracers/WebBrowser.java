@@ -7,6 +7,7 @@ package wikiracers.wikiracers;
 
 import android.app.Activity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -99,6 +100,7 @@ public class WebBrowser extends Activity {
                         countText.setText(String.valueOf(pageCount));
                         backSwitch = true;
                         if (get_page_title(url).equals(target_URL)){
+                            startActivity(new Intent(getApplicationContext(), WinnerPage.class));
                             list_URL.add(url);
                             TextView url_target = (TextView) findViewById(R.id.browser_webView_Text);
                             url_target.setText("Winner");
