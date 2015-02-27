@@ -69,18 +69,28 @@ public class WebBrowser extends Activity {
             setContentView(R.layout.activity_web_browser);
         }
         final TextView countText = (TextView) findViewById(R.id.countView2);
+        final TextView targetPageText = (TextView)findViewById(R.id.browser_webView_Text);
 
         //Links Activity Element to refrencable object
         mWebView = (WebView) findViewById(R.id.browser_webView_Window);
         //Sets internal JavaScript to ON
         mWebView.getSettings().setJavaScriptEnabled(true);
         //Sets Starting URL
-        mWebView.loadUrl("http://en.wikipedia.org/wiki/Special:Random");
+        if (currentURL.equals("")) {
+            mWebView.loadUrl("http://en.wikipedia.org/wiki/Special:Random");
+        }
+        else{
+            //booted up already started game
+            mWebView.loadUrl(currentURL);
+            targetPageText.setText(get_page_title(target_URL));
+            countText.setText(String.valueOf(pageCount));
+            peekMode = false;
+        }
+
         mWebView.setWebViewClient(new mWebViewClient(){
 
             //counts when a page is loaded completely
             //used instead of onPageStarted for counting reasons (redirections, etc.)
-            //TODO: make sure the startup doesn't start past 0
             //TODO: make sure the count doesn't go up when page load fails
 
             @Override
@@ -137,7 +147,6 @@ public class WebBrowser extends Activity {
         });
         // Back button functionality
         final Button webBack = (Button)findViewById(R.id.browser_webView_Back_Button);
-        final TextView targetPageText = (TextView)findViewById(R.id.browser_webView_Text);
         View.OnClickListener listen = new View.OnClickListener(){
             @Override
             public void onClick(View view){
