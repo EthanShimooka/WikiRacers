@@ -84,5 +84,13 @@ public class LoginPage extends Activity {
                 });
             }
         });
+
+        //menu button
+        findViewById(R.id.main_menu_button).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                startActivity(new Intent(LoginPage.this, MenuActivity.class));
+            }
+
+        });
     }
 }

@@ -38,8 +38,7 @@ public class MenuActivity extends Activity {
         setContentView(R.layout.activity_menu_layout);
 
 // Enable Local Datastore.
-        Parse.enableLocalDatastore(this);
-
+        //Parse.enableLocalDatastore(this);
         Parse.initialize(this, "pUt8rvMtRcdgXu3PMpyLyjbxkTIA4xEeVEJ4C1hp", "P7dA3hQGSO8NpuCODjgzJFH1F7ADn487syS55FBq");
 
 

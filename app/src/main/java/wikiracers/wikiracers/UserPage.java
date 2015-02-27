@@ -43,6 +43,7 @@ public class UserPage extends Activity {
         phoneText.setText(phone);
         lView.addView(phoneText);
 
+        //logout button
         findViewById(R.id.logout_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 final ProgressDialog dlg = new ProgressDialog(UserPage.this);
@@ -51,7 +52,16 @@ public class UserPage extends Activity {
                 dlg.show();
 
                 ParseUser.logOut();
+                dlg.dismiss();
                 startActivity(new Intent(UserPage.this, SettingsPage.class));
+            }
+
+        });
+
+        //menu button
+        findViewById(R.id.main_menu_button).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                startActivity(new Intent(UserPage.this, MenuActivity.class));
             }
 
         });

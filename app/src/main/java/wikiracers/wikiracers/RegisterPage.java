@@ -99,5 +99,13 @@ public class RegisterPage extends Activity {
                 });
             }
         });
+
+        //menu button
+        findViewById(R.id.main_menu_button).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                startActivity(new Intent(RegisterPage.this, MenuActivity.class));
+            }
+
+        });
     }
 }
