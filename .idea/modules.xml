@@ -3,6 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/WikiRacers.iml" filepath="$PROJECT_DIR$/WikiRacers.iml" />
+<<<<<<< HEAD
+      <module fileurl="file://$PROJECT_DIR$/WikiRacers-master.iml" filepath="$PROJECT_DIR$/WikiRacers-master.iml" />
+=======
+>>>>>>> d2d7456361245f8b46b75d161752f3269154b15b
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
