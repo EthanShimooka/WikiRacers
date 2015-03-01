@@ -7,6 +7,7 @@ package wikiracers.wikiracers;
 
 import android.app.Activity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -71,6 +72,7 @@ public class WebBrowser extends Activity {
         final TextView countText = (TextView) findViewById(R.id.countView2);
         final TextView targetPageText = (TextView)findViewById(R.id.browser_webView_Text);
 
+
         //Links Activity Element to refrencable object
         mWebView = (WebView) findViewById(R.id.browser_webView_Window);
         //Sets internal JavaScript to ON
@@ -108,7 +110,8 @@ public class WebBrowser extends Activity {
                         Log.d("game", url + " ~ " + String.valueOf(pageCount) + "target:" + target_URL + " start:" + startingURL);
                         countText.setText(String.valueOf(pageCount));
                         backSwitch = true;
-                        if (get_page_title(url).equals(target_URL)){
+                        if (Util.get_page_title(url).equals(target_URL)){
+                            startActivity(new Intent(getApplicationContext(), WinnerPage.class));
                             list_URL.add(url);
                             TextView url_target = (TextView) findViewById(R.id.browser_webView_Text);
                             url_target.setText("Winner");
@@ -126,8 +129,10 @@ public class WebBrowser extends Activity {
                         else if(target_URL.equals("") && !url.equals("http://en.m.wikipedia.org/wiki/Special:Random")){
                             TextView url_target;
                             url_target = (TextView)findViewById(R.id.browser_webView_Text);
-                            url_target.setText(get_page_title(url));
-                            target_URL = get_page_title(url);
+
+                            //TODO: Check if the string parse works                                                                      ///*
+                            url_target.setText(Util.textFormat( Util.get_page_title(url)));
+                            target_URL = Util.get_page_title(url);
                             target_URL_full = url;
                             mWebView.loadUrl(startingURL);
                             pageCount = 0;
@@ -145,6 +150,9 @@ public class WebBrowser extends Activity {
                 super.onPageStarted(view,url,favicon);
             }
         });
+
+
+
         // Back button functionality
         final Button webBack = (Button)findViewById(R.id.browser_webView_Back_Button);
         View.OnClickListener listen = new View.OnClickListener(){
@@ -176,22 +184,11 @@ public class WebBrowser extends Activity {
         webBack.setOnClickListener(listen);
         targetPageText.setOnClickListener(listen);
 
-
-
-        //Fragment for Web browser menu
-        ////////////////////////////////////////////////
-        //bootFrag();
-
         loadPop();
-
-
 
     }
 
-
-
     private void loadPop(){
-
 
         final Button btnOpenPopup = (Button)findViewById(R.id.openpopup);
         btnOpenPopup.setOnClickListener(new Button.OnClickListener(){
@@ -202,8 +199,6 @@ public class WebBrowser extends Activity {
                         = (LayoutInflater)getBaseContext()
                         .getSystemService(LAYOUT_INFLATER_SERVICE);
                 View popupView = layoutInflater.inflate(R.layout.popup, null);
-
-
 
                 final PopupWindow popupWindow = new PopupWindow(
                         popupView,
@@ -218,49 +213,11 @@ public class WebBrowser extends Activity {
                         // TODO Auto-generated method stub
                         popupWindow.dismiss();
                     }});
-
-
                 //can be any resource apparently
                 popupWindow.showAtLocation(findViewById(R.id.browser_webView_Text) ,
                         Gravity.CENTER, 0, 0);
             }});
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-    private void bootFrag ( ) {
-        FragmentManager fragmentManager = getFragmentManager();
-       final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-      final  WebBrowserMenuFrag webBrowserMenuFrag = new WebBrowserMenuFrag();
-        final Button pauseButton = (Button)findViewById(R.id.browser_pause);
-        View.OnClickListener listen2 = new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                if (view == pauseButton){
-
-                    fragmentTransaction.replace(android.R.id.content, webBrowserMenuFrag);
-                }
-            }};
-        pauseButton.setOnClickListener(listen2);
-
-        fragmentTransaction.commit();
-
-    }
-
-*/
 
     //Removes Web Client default buttons and bounds the browser space to
     //our WebView activity.
@@ -276,17 +233,5 @@ public class WebBrowser extends Activity {
             return true;
         }
     }
-
-
-    public String get_page_title(String url){
-        //Gets everything after the final / in the Url aka the page_title
-        int get_last_slash = url.lastIndexOf('/');
-        String page_title = url.substring(get_last_slash+1);
-        return page_title;
-    }
-
-
-
-
 
 }

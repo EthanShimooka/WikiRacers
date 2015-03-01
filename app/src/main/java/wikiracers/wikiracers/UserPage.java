@@ -7,7 +7,9 @@ package wikiracers.wikiracers;
  */
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,31 +31,38 @@ public class UserPage extends Activity {
         String email = currentUser.getString("email");
         String phone = currentUser.getString("phone");
 
-        LinearLayout lView = (LinearLayout)findViewById(R.id.user_data);
-        TextView usernameText = new TextView(UserPage.this);
-        usernameText.setText(username);
-        lView.addView(usernameText);
-        TextView nameText = new TextView(UserPage.this);
-        nameText.setText(name);
-        lView.addView(nameText);
-        TextView emailText = new TextView(UserPage.this);
-        emailText.setText(email);
-        lView.addView(emailText);
-        TextView phoneText = new TextView(UserPage.this);
-        phoneText.setText(phone);
-        lView.addView(phoneText);
+        TextView usernameTextView=(TextView)findViewById(R.id.username);
+        usernameTextView.setText(username);
+        TextView emailTextView=(TextView)findViewById(R.id.email);
+        emailTextView.setText(email);
+        if (!name.equals("")) {
+            TextView nameTextView = (TextView) findViewById(R.id.name);
+            nameTextView.setText(name);
+        }
+        if (!phone.equals("")) {
+            TextView phoneTextView = (TextView) findViewById(R.id.phone);
+            phoneTextView.setText(phone);
+        }
 
         //logout button
         findViewById(R.id.logout_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                final ProgressDialog dlg = new ProgressDialog(UserPage.this);
-                dlg.setTitle("Logging out...");
-                dlg.setMessage("Please wait...");
-                dlg.show();
-
-                ParseUser.logOut();
-                dlg.dismiss();
-                startActivity(new Intent(UserPage.this, SettingsPage.class));
+                new AlertDialog.Builder(UserPage.this)
+                        .setMessage("Are you sure you want to log out?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                final ProgressDialog dlg = new ProgressDialog(UserPage.this);
+                                dlg.setTitle("Logging out...");
+                                dlg.setMessage("Please wait...");
+                                dlg.show();
+                                ParseUser.logOut();
+                                dlg.dismiss();
+                                startActivity(new Intent(UserPage.this, SettingsPage.class));
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
             }
 
         });
