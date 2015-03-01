@@ -2,6 +2,7 @@ package wikiracers.wikiracers;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +38,7 @@ public class MenuActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_layout);
 
+
 // Enable Local Datastore.
         //Parse.enableLocalDatastore(this);
         Parse.initialize(this, "pUt8rvMtRcdgXu3PMpyLyjbxkTIA4xEeVEJ4C1hp", "P7dA3hQGSO8NpuCODjgzJFH1F7ADn487syS55FBq");
@@ -65,6 +67,9 @@ public class MenuActivity extends Activity {
                 startActivity(new Intent(getApplicationContext(), SettingsPage.class));
             }
         });
+
+
+
     }
 
 
