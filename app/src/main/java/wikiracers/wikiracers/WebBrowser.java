@@ -71,6 +71,10 @@ public class WebBrowser extends Activity {
         }
         final TextView countText = (TextView) findViewById(R.id.countView2);
 
+
+
+
+
         //Links Activity Element to refrencable object
         mWebView = (WebView) findViewById(R.id.browser_webView_Window);
         //Sets internal JavaScript to ON
@@ -118,7 +122,9 @@ public class WebBrowser extends Activity {
                         else if(target_URL.equals("") && !url.equals("http://en.m.wikipedia.org/wiki/Special:Random")){
                             TextView url_target;
                             url_target = (TextView)findViewById(R.id.browser_webView_Text);
-                            url_target.setText(get_page_title(url));
+
+                            //TODO: Check if the string parse works                                                                      ///*
+                            url_target.setText(Util.textFormat( get_page_title(url)));
                             target_URL = get_page_title(url);
                             target_URL_full = url;
                             mWebView.loadUrl(startingURL);
@@ -137,6 +143,9 @@ public class WebBrowser extends Activity {
                 super.onPageStarted(view,url,favicon);
             }
         });
+
+
+
         // Back button functionality
         final Button webBack = (Button)findViewById(R.id.browser_webView_Back_Button);
         final TextView targetPageText = (TextView)findViewById(R.id.browser_webView_Text);
