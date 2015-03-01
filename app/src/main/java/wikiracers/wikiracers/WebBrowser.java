@@ -158,6 +158,8 @@ public class WebBrowser extends Activity {
         View.OnClickListener listen = new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                Util.playWavSound(getApplicationContext(), "wrong");
+
                 if (view == webBack){
                     Log.d("game", "back clicked");
                     if(backSwitch){Log.d("game","backswitch true");}
@@ -195,6 +197,8 @@ public class WebBrowser extends Activity {
 
             @Override
             public void onClick(View arg0) {
+                Util.playWavSound(getApplicationContext(), "select");
+
                 LayoutInflater layoutInflater
                         = (LayoutInflater)getBaseContext()
                         .getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -212,6 +216,8 @@ public class WebBrowser extends Activity {
                     public void onClick(View v) {
                         // TODO Auto-generated method stub
                         popupWindow.dismiss();
+                        Util.playWavSound(getApplicationContext(), "wrong");
+
                     }});
                 //can be any resource apparently
                 popupWindow.showAtLocation(findViewById(R.id.browser_webView_Text) ,

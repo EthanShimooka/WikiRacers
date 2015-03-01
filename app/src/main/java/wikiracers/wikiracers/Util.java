@@ -1,8 +1,10 @@
 package wikiracers.wikiracers;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 
 /**
  * =========================================
@@ -48,9 +50,20 @@ public class Util {
 
 
 
+       //Function for playing various a sound clips
 
+       public static void playWavSound(Context context, String sound_file) {
+           MediaPlayer mp;
 
-
+           if (sound_file == "right"){
+              mp = MediaPlayer.create(context,R.raw.sfx_right );
+           }else if (sound_file == "wrong"){
+              mp = MediaPlayer.create(context,R.raw.sfx_wrong );
+             }else{
+               mp = MediaPlayer.create(context,R.raw.sfx_select );
+           }
+           mp.start();
+    }
 
 
 }

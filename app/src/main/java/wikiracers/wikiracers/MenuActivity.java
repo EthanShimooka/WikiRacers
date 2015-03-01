@@ -20,8 +20,6 @@ import com.parse.Parse;
  * Project : WikiRacers
  * =========================================
  *
- * TODO: PLEASE READ OVER THE COMMENTS FOR EACH CLASS
- *
  * Messages:
  *
  * 2/15/2015
@@ -33,10 +31,9 @@ import com.parse.Parse;
  * mentor and he was advising to go for a more simple structure with separate activities for each
  * full screen window. This means our stats screen may possibly end up being another activity.
  *
- *
- *
- *
  */
+
+
 public class MenuActivity extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +49,11 @@ public class MenuActivity extends Activity {
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
         }
+
+
 // Enable Local Datastore.
         //Parse.enableLocalDatastore(this);
         Parse.initialize(this, "pUt8rvMtRcdgXu3PMpyLyjbxkTIA4xEeVEJ4C1hp", "P7dA3hQGSO8NpuCODjgzJFH1F7ADn487syS55FBq");
-
-
-
-
 
 
 
@@ -73,12 +68,15 @@ public class MenuActivity extends Activity {
                 //Call to new browser Activity, when button is pressed.
                 //Todo: fix error regarding pressing back arrow button (<|) when playing game
                 startActivity(new Intent(getApplicationContext(), WebBrowser.class));
+
+                Util.playWavSound(getApplicationContext(), "select");
             }
         });
 
         Button settingButton = (Button) findViewById(R.id.settings_button);
         settingButton.setOnClickListener(new View.OnClickListener() {
             public void onClick (View v){
+                Util.playWavSound(getApplicationContext(), "select");
 
                 //Call to new browser Activity, when button is pressed.
                 //Todo: fix error regarding pressing back arrow button (<|) when playing game
