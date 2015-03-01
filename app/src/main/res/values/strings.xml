@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">WikiRacers</string>
+    <string name="Title">WikiRACERS</string>
+    <string name="Build">WikiRACERS -- Build 0.0.6</string>
+    <string name="action_settings">Settings</string>
+    <string name="Browser_Button_Backtrack">Back</string>
+    <string name="webview_target_url">TARGET URL GOES HERE</string>
+    <string name="menu_button_share">Share</string>
+    <string name="menu_button_newgame">Start Game</string>
+    <string name="menu_button_settings">User Account</string>
+    <string name="fragment_webbrowser_button_home">HOME</string>
+    <string name="username_text">Username:</string>
+    <string name="email_text">Email:</string>
+    <string name="name_text">Name:</string>
+    <string name="phone_text">Phone Number:</string>
+    <string name="password_text">Password:</string>
+    <string name="create_text">Create</string>
+    <string name="register_page_title_text">Register Page</string>
+    <string name="logout_button_text">Log Out</string>
+    <string name="register_button_text">Register</string>
+    <string name="login_button_text">Login</string>
+    <string name="login_page_title">Login Page</string>
+    <string name="main_menu_button_text">Main Menu</string>
+    <string name="count_text">Moves:</string>
+    <string name="pause_button_text">II</string>
+    <string name="loses_text">Loses</string>
+    <string name="attempts_text">Attempts</string>
+    <string name="WLR_text">Win/Lose Ratio</string>
+    <string name="wins_text">Wins</string>
+    <string name="user_text">User</string>
+    <string name="world_average_text">World Average</string>
+    <string name="add_friend_text">Add Friend</string>
+    <string name="dot_dot_dot">...</string>
+    <string name="original_phone_string">No Phone Number</string>
+    <string name="original_name_string">No Name</string>
+    <string name="original_email_text">email</string>
+    <string name="original_username_text">username</string>
+
+</resources>
