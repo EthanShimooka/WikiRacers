@@ -84,7 +84,7 @@ public class WebBrowser extends Activity {
         else{
             //booted up already started game
             mWebView.loadUrl(currentURL);
-            targetPageText.setText(get_page_title(target_URL));
+            targetPageText.setText(Util.get_page_title(target_URL));
             countText.setText(String.valueOf(pageCount));
             peekMode = false;
         }
