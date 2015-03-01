@@ -72,9 +72,6 @@ public class WebBrowser extends Activity {
         final TextView countText = (TextView) findViewById(R.id.countView2);
 
 
-
-
-
         //Links Activity Element to refrencable object
         mWebView = (WebView) findViewById(R.id.browser_webView_Window);
         //Sets internal JavaScript to ON
@@ -178,18 +175,11 @@ public class WebBrowser extends Activity {
         webBack.setOnClickListener(listen);
         targetPageText.setOnClickListener(listen);
 
-
-
         loadPop();
-
-
 
     }
 
-
-
     private void loadPop(){
-
 
         final Button btnOpenPopup = (Button)findViewById(R.id.openpopup);
         btnOpenPopup.setOnClickListener(new Button.OnClickListener(){
@@ -200,8 +190,6 @@ public class WebBrowser extends Activity {
                         = (LayoutInflater)getBaseContext()
                         .getSystemService(LAYOUT_INFLATER_SERVICE);
                 View popupView = layoutInflater.inflate(R.layout.popup, null);
-
-
 
                 final PopupWindow popupWindow = new PopupWindow(
                         popupView,
@@ -216,19 +204,11 @@ public class WebBrowser extends Activity {
                         // TODO Auto-generated method stub
                         popupWindow.dismiss();
                     }});
-
-
                 //can be any resource apparently
                 popupWindow.showAtLocation(findViewById(R.id.browser_webView_Text) ,
                         Gravity.CENTER, 0, 0);
             }});
-
     }
-
-
-
-
-
 
     //Removes Web Client default buttons and bounds the browser space to
     //our WebView activity.
@@ -244,8 +224,5 @@ public class WebBrowser extends Activity {
             return true;
         }
     }
-
-
-
 
 }

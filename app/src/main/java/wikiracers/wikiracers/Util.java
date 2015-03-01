@@ -34,6 +34,7 @@ public class Util {
 
     //Todo:Check that there are no conflicts
     // Function to fetch specified URL
+
     public static String get_page_title(String url){
         //Gets everything after the final / in the Url aka the page_title
         int get_last_slash = url.lastIndexOf('/');
