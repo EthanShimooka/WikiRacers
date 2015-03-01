@@ -16,7 +16,7 @@ package wikiracers.wikiracers;
 public class Util {
 
 
-    //Function to format wikipedia strings with underscores to white spaces.
+    // Function to format wikipedia strings with underscores to white spaces.
     // Takes (STRING) and returns (STRING)
 
     //TODO: Test module
@@ -32,9 +32,14 @@ public class Util {
     }
 
 
-
-
-
+    //Todo:Check that there are no conflicts
+    // Function to fetch specified URL
+    public static String get_page_title(String url){
+        //Gets everything after the final / in the Url aka the page_title
+        int get_last_slash = url.lastIndexOf('/');
+        String page_title = url.substring(get_last_slash+1);
+        return page_title;
+    }
 
 
 }
