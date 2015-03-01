@@ -98,6 +98,9 @@ public class WebBrowser extends Activity {
             @Override
             public void onPageFinished(WebView view, String url){
                 super.onPageFinished(view, url);
+
+
+
                 if(peekMode){
 
                 }
@@ -106,6 +109,10 @@ public class WebBrowser extends Activity {
                         currentURL = url;
                         if(gameRun) {
                             pageCount++;
+
+                            if (list_URL.contains(currentURL) == false)
+                               Util.playWavSound(getApplicationContext(), "right");
+
                         }
                         Log.d("game", url + " ~ " + String.valueOf(pageCount) + "target:" + target_URL + " start:" + startingURL);
                         countText.setText(String.valueOf(pageCount));
@@ -140,14 +147,24 @@ public class WebBrowser extends Activity {
                         }else if (gameStart){
                             //Todo: test this (play the game all the way through)
                             list_URL.add(url);
+
+
+
                         }
                     }
                 }
             }
+
+            //Run for a successfully loaded window in webview
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon){
                 backSwitch = false; //to prevent cancelling a load
                 super.onPageStarted(view,url,favicon);
+
+                //Conditionals to check for link pressing sound
+                //if (backSwitch == true)
+                //   Util.playWavSound(getApplicationContext(), "right");
+
             }
         });
 

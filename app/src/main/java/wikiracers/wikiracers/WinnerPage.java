@@ -39,6 +39,8 @@ public class WinnerPage extends Activity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), SettingsPage.class));
+                Util.playWavSound(getApplicationContext(), "select");
+
             }
         };
         statsbtn.setOnClickListener(statsYell);
@@ -50,6 +52,8 @@ public class WinnerPage extends Activity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+                Util.playWavSound(getApplicationContext(), "select");
+
             }
         };
         menuBtn.setOnClickListener(statsYell);
