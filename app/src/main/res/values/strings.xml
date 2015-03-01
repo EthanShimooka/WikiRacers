@@ -37,5 +37,7 @@
     <string name="original_name_string">No Name</string>
     <string name="original_email_text">email</string>
     <string name="original_username_text">username</string>
+    <string name="total_steps_text">Total Steps</string>
+    <string name="average_steps_text">Average Steps</string>
 
 </resources>

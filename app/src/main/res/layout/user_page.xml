@@ -85,7 +85,8 @@
                 android:gravity="center"
                 android:padding="3dip"
                 android:layout_margin="2dp"
-                android:background="#000000"/>
+                android:background="#000000"
+                android:id="@+id/num_wins"/>
             <TextView
                 android:text="@string/dot_dot_dot"
                 android:gravity="end"
@@ -96,7 +97,7 @@
 
         <TableRow>
             <TextView
-                android:text="@string/loses_text"
+                android:text="@string/total_steps_text"
                 android:padding="3dip"
                 android:layout_margin="2dp"
                 android:background="#000000"/>
@@ -105,7 +106,30 @@
                 android:gravity="center"
                 android:padding="3dip"
                 android:layout_margin="2dp"
+                android:background="#000000"
+                android:id="@+id/total_steps"/>
+            <TextView
+                android:text="@string/dot_dot_dot"
+                android:gravity="end"
+                android:padding="3dip"
+                android:layout_margin="2dp"
                 android:background="#000000"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="@string/average_steps_text"
+                android:padding="3dip"
+                android:layout_margin="2dp"
+                android:background="#000000"/>
+
+            <TextView
+                android:text="@string/dot_dot_dot"
+                android:gravity="center"
+                android:padding="3dip"
+                android:layout_margin="2dp"
+                android:background="#000000"
+                android:id="@+id/avg_steps"/>
             <TextView
                 android:text="@string/dot_dot_dot"
                 android:gravity="end"
@@ -153,6 +177,7 @@
                 android:layout_margin="2dp"
                 android:background="#000000"/>
         </TableRow>
+
     </TableLayout>
 
     <RelativeLayout

@@ -30,6 +30,8 @@ public class UserPage extends Activity {
         String name = currentUser.getString("name");
         String email = currentUser.getString("email");
         String phone = currentUser.getString("phone");
+        Integer totalWins = currentUser.getInt("numFinishedGames");
+        Integer totalSteps = currentUser.getInt("numTotalSteps");
 
         TextView usernameTextView=(TextView)findViewById(R.id.username);
         usernameTextView.setText(username);
@@ -43,7 +45,16 @@ public class UserPage extends Activity {
             TextView phoneTextView = (TextView) findViewById(R.id.phone);
             phoneTextView.setText(phone);
         }
-
+        TextView totalStep = (TextView) findViewById(R.id.total_steps);
+        totalStep.setText(totalSteps.toString());
+        TextView totalWinsView = (TextView) findViewById(R.id.num_wins);
+        totalWinsView.setText(totalWins.toString());
+        TextView avgStepsView = (TextView) findViewById(R.id.avg_steps);
+        if(totalSteps == 0){avgStepsView.setText("0");}
+        else{
+            double avgSteps = totalSteps.doubleValue()/totalWins.doubleValue();
+            avgStepsView.setText(String.valueOf(avgSteps));
+        }
         //logout button
         findViewById(R.id.logout_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

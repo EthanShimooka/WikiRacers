@@ -1,5 +1,7 @@
 package wikiracers.wikiracers;
 
+import com.parse.ParseUser;
+
 /**
  * =========================================
  * Authored by Ethan , 2/28/2015
@@ -42,5 +44,17 @@ public class Util {
         return page_title;
     }
 
+    public static boolean update_db(int steps){
+        ParseUser currentUser = ParseUser.getCurrentUser();
+
+        //check if the user is logged in
+        if (currentUser != null){
+            currentUser.increment("numFinishedGames");
+            currentUser.increment("numTotalSteps", steps);
+            currentUser.saveInBackground();
+            return true;
+        }
+        else{return false;}
+    }
 
 }
