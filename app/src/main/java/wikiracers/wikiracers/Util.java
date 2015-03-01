@@ -1,5 +1,9 @@
 package wikiracers.wikiracers;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 /**
  * =========================================
  * Authored by Ethan , 2/28/2015
@@ -41,6 +45,12 @@ public class Util {
         String page_title = url.substring(get_last_slash+1);
         return page_title;
     }
+
+
+
+
+
+
 
 
 }
