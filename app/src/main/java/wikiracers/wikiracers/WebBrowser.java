@@ -107,10 +107,7 @@ public class WebBrowser extends Activity {
                 else{backSwitch = true;
                     if (!url.equals(currentURL)) {
                         currentURL = url;
-<<<<<<< HEAD
                         Util.remove_html_elements(mWebView);
-=======
->>>>>>> d2d7456361245f8b46b75d161752f3269154b15b
                         if(gameRun) {
                             pageCount++;
 
@@ -179,11 +176,8 @@ public class WebBrowser extends Activity {
         View.OnClickListener listen = new View.OnClickListener(){
             @Override
             public void onClick(View view){
-<<<<<<< HEAD
-=======
                 Util.playWavSound(getApplicationContext(), "wrong");
 
->>>>>>> d2d7456361245f8b46b75d161752f3269154b15b
                 if (view == webBack){
                     Log.d("game", "back clicked");
                     if(backSwitch){Log.d("game","backswitch true");}
@@ -221,11 +215,9 @@ public class WebBrowser extends Activity {
 
             @Override
             public void onClick(View arg0) {
-<<<<<<< HEAD
-=======
+
                 Util.playWavSound(getApplicationContext(), "select");
 
->>>>>>> d2d7456361245f8b46b75d161752f3269154b15b
                 LayoutInflater layoutInflater
                         = (LayoutInflater)getBaseContext()
                         .getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -243,11 +235,9 @@ public class WebBrowser extends Activity {
                     public void onClick(View v) {
                         // TODO Auto-generated method stub
                         popupWindow.dismiss();
-<<<<<<< HEAD
-=======
+
                         Util.playWavSound(getApplicationContext(), "wrong");
 
->>>>>>> d2d7456361245f8b46b75d161752f3269154b15b
                     }});
                 //can be any resource apparently
                 popupWindow.showAtLocation(findViewById(R.id.browser_webView_Text) ,
