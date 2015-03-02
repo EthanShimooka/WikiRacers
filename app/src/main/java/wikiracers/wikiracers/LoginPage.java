@@ -34,7 +34,7 @@ public class LoginPage extends Activity {
         findViewById(R.id.register_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), RegisterPage.class));
-                Util.playWavSound(getApplicationContext(), "select");
+                Util.playWavSound(getApplicationContext(), "select");  //sound
 
 
             }
@@ -43,6 +43,9 @@ public class LoginPage extends Activity {
         //log in button
         findViewById(R.id.login_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                Util.playWavSound(getApplicationContext(), "select");   //sound
+
+
                 final ProgressDialog dlg = new ProgressDialog(LoginPage.this);
                 dlg.setTitle("Logging in...");
                 dlg.setMessage("Please wait...");
