@@ -85,5 +85,11 @@ public class UserPage extends Activity {
             }
 
         });
+
+        //friend button
+        findViewById(R.id.add_friend_button).setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                startActivity(new Intent(UserPage.this, FriendPage.class));
+            }});
     }
 }

@@ -19,6 +19,7 @@
         <activity android:name=".UserPage"/>
         <activity android:name=".LoginPage"/>
         <activity android:name=".WinnerPage"/>
+        <activity android:name=".FriendPage"/>
 
         <activity
             android:name=".MenuActivity"
