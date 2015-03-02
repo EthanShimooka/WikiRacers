@@ -98,14 +98,22 @@ public class WebBrowser extends Activity {
             @Override
             public void onPageFinished(WebView view, String url){
                 super.onPageFinished(view, url);
+
+
+
                 if(peekMode){
 
                 }
                 else{backSwitch = true;
                     if (!url.equals(currentURL)) {
                         currentURL = url;
+                        Util.remove_html_elements(mWebView);
                         if(gameRun) {
                             pageCount++;
+
+                            if (list_URL.contains(currentURL) == false)
+                               Util.playWavSound(getApplicationContext(), "right");
+
                         }
                         Log.d("game", url + " ~ " + String.valueOf(pageCount) + "target:" + target_URL + " start:" + startingURL);
                         countText.setText(String.valueOf(pageCount));
@@ -143,14 +151,24 @@ public class WebBrowser extends Activity {
                         }else if (gameStart){
                             //Todo: test this (play the game all the way through)
                             list_URL.add(url);
+
+
+
                         }
                     }
                 }
             }
+
+            //Run for a successfully loaded window in webview
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon){
                 backSwitch = false; //to prevent cancelling a load
                 super.onPageStarted(view,url,favicon);
+
+                //Conditionals to check for link pressing sound
+                //if (backSwitch == true)
+                //   Util.playWavSound(getApplicationContext(), "right");
+
             }
         });
 
@@ -161,6 +179,8 @@ public class WebBrowser extends Activity {
         View.OnClickListener listen = new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                Util.playWavSound(getApplicationContext(), "wrong");
+
                 if (view == webBack){
                     if (!peekMode) {
                         Log.d("game", "back clicked");
@@ -220,6 +240,9 @@ public class WebBrowser extends Activity {
 
             @Override
             public void onClick(View arg0) {
+
+                Util.playWavSound(getApplicationContext(), "select");
+
                 LayoutInflater layoutInflater
                         = (LayoutInflater)getBaseContext()
                         .getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -237,6 +260,9 @@ public class WebBrowser extends Activity {
                     public void onClick(View v) {
                         // TODO Auto-generated method stub
                         popupWindow.dismiss();
+
+                        Util.playWavSound(getApplicationContext(), "wrong");
+
                     }});
                 Button reset = (Button)popupView.findViewById(R.id.pop_restart);
                 reset.setOnClickListener(new Button.OnClickListener() {

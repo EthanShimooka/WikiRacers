@@ -1,10 +1,16 @@
 package wikiracers.wikiracers;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.TransitionDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
 import com.parse.Parse;
 
 
@@ -14,8 +20,11 @@ import com.parse.Parse;
  * Project : WikiRacers
  * =========================================
  *
+<<<<<<< HEAD
  * TODO: PLEASE READ OVER THE COMMENTS FOR EACH CLASS
  *
+=======
+>>>>>>> d2d7456361245f8b46b75d161752f3269154b15b
  * Messages:
  *
  * 2/15/2015
@@ -27,19 +36,33 @@ import com.parse.Parse;
  * mentor and he was advising to go for a more simple structure with separate activities for each
  * full screen window. This means our stats screen may possibly end up being another activity.
  *
+<<<<<<< HEAD
  *
  *
  *
  */
+
 public class MenuActivity extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_layout);
 
+
+        if (haveNetworkConnection() == false) {
+            Context context = getApplicationContext();
+            CharSequence text = "Network Unavailable!";
+            int duration = Toast.LENGTH_LONG;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+
 // Enable Local Datastore.
         //Parse.enableLocalDatastore(this);
         Parse.initialize(this, "pUt8rvMtRcdgXu3PMpyLyjbxkTIA4xEeVEJ4C1hp", "P7dA3hQGSO8NpuCODjgzJFH1F7ADn487syS55FBq");
+
+
 
 
         //ParseObject testObject = new ParseObject("TestObject");
@@ -53,6 +76,10 @@ public class MenuActivity extends Activity {
                 //Call to new browser Activity, when button is pressed.
                 //Todo: fix error regarding pressing back arrow button (<|) when playing game
                 startActivity(new Intent(getApplicationContext(), WebBrowser.class));
+
+
+                Util.playWavSound(getApplicationContext(), "select");
+
             }
         });
 
@@ -60,11 +87,16 @@ public class MenuActivity extends Activity {
         settingButton.setOnClickListener(new View.OnClickListener() {
             public void onClick (View v){
 
+                Util.playWavSound(getApplicationContext(), "select");
+
                 //Call to new browser Activity, when button is pressed.
                 //Todo: fix error regarding pressing back arrow button (<|) when playing game
                 startActivity(new Intent(getApplicationContext(), SettingsPage.class));
             }
         });
+
+
+
     }
 
 
@@ -149,6 +181,28 @@ public class MenuActivity extends Activity {
     @Override
     protected void onStop() {
         super.onStop();
+    }
+
+
+
+    //haveNetworkConnection() Check that there is an active internet connection with either wiFi or
+    // cellular connection.
+
+    private boolean haveNetworkConnection() {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnectedWifi = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnectedMobile = true;
+        }
+        return haveConnectedWifi || haveConnectedMobile;
     }
 
 
