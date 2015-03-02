@@ -34,12 +34,18 @@ public class LoginPage extends Activity {
         findViewById(R.id.register_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), RegisterPage.class));
+                Util.playWavSound(getApplicationContext(), "select");  //sound
+
+
             }
         });
 
         //log in button
         findViewById(R.id.login_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                Util.playWavSound(getApplicationContext(), "select");   //sound
+
+
                 final ProgressDialog dlg = new ProgressDialog(LoginPage.this);
                 dlg.setTitle("Logging in...");
                 dlg.setMessage("Please wait...");
@@ -64,6 +70,8 @@ public class LoginPage extends Activity {
                 if (input_error) {
                     Toast.makeText(LoginPage.this, validationErrorMessage.toString(), Toast.LENGTH_LONG).show();
                     dlg.dismiss();
+                    Util.playWavSound(getApplicationContext(), "wrong");
+
                     return;
                 }
 
@@ -79,6 +87,8 @@ public class LoginPage extends Activity {
                             //login success
                             Intent intent = new Intent(LoginPage.this, SettingsPage.class);
                             startActivity(intent);
+                            Util.playWavSound(getApplicationContext(), "right");
+
                         }
                     }
                 });
@@ -89,6 +99,8 @@ public class LoginPage extends Activity {
         findViewById(R.id.main_menu_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 startActivity(new Intent(LoginPage.this, MenuActivity.class));
+                Util.playWavSound(getApplicationContext(), "wrong");
+
             }
 
         });

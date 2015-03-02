@@ -75,7 +75,7 @@ public class Util {
         mWebView.loadUrl("javascript:(function() { " + "document.getElementById('footer').style.display = 'none'; " + "})()");
     }
 
-    public String get_dictionary_word(Context myContext){
+    public static String get_dictionary_word(Context myContext){
         String word = null;
         Random rand = new Random();
         try {
@@ -85,7 +85,7 @@ public class Util {
             {
                 ++n;
                 String line = sc.nextLine();
-                if(rand.nextInt(n) == 0)
+                if((int) (Math.random() * n) == 0)
                     word = line;
             }
         } catch (IOException e) {
@@ -97,12 +97,9 @@ public class Util {
 
 
 
-
-
-
-
-
        //Function for playing various a sound clips
+       //TODO: Check for leaks
+
 
        public static void playWavSound(Context context, String sound_file) {
            MediaPlayer mp;
@@ -115,6 +112,13 @@ public class Util {
                mp = MediaPlayer.create(context,R.raw.sfx_select );
            }
            mp.start();
+           if(mp!=null)
+           {
+               if(!(mp.isPlaying())){
+                   mp.stop();
+                   mp.release();
+               }
+           }
     }
 
 

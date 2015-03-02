@@ -104,6 +104,8 @@ public class RegisterPage extends Activity {
         findViewById(R.id.main_menu_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 startActivity(new Intent(RegisterPage.this, MenuActivity.class));
+                Util.playWavSound(getApplicationContext(), "wrong");
+
             }
 
         });

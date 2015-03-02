@@ -41,11 +41,7 @@ import com.parse.Parse;
  *
  *
  */
-=======
- */
 
-
->>>>>>> d2d7456361245f8b46b75d161752f3269154b15b
 public class MenuActivity extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,24 +57,14 @@ public class MenuActivity extends Activity {
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
         }
-<<<<<<< HEAD
-=======
 
-
->>>>>>> d2d7456361245f8b46b75d161752f3269154b15b
 // Enable Local Datastore.
         //Parse.enableLocalDatastore(this);
         Parse.initialize(this, "pUt8rvMtRcdgXu3PMpyLyjbxkTIA4xEeVEJ4C1hp", "P7dA3hQGSO8NpuCODjgzJFH1F7ADn487syS55FBq");
 
 
 
-<<<<<<< HEAD
 
-
-
-
-=======
->>>>>>> d2d7456361245f8b46b75d161752f3269154b15b
         //ParseObject testObject = new ParseObject("TestObject");
         //testObject.put("foo", "bar");
         //testObject.saveInBackground();
@@ -90,21 +76,18 @@ public class MenuActivity extends Activity {
                 //Call to new browser Activity, when button is pressed.
                 //Todo: fix error regarding pressing back arrow button (<|) when playing game
                 startActivity(new Intent(getApplicationContext(), WebBrowser.class));
-<<<<<<< HEAD
-=======
+
 
                 Util.playWavSound(getApplicationContext(), "select");
->>>>>>> d2d7456361245f8b46b75d161752f3269154b15b
+
             }
         });
 
         Button settingButton = (Button) findViewById(R.id.settings_button);
         settingButton.setOnClickListener(new View.OnClickListener() {
             public void onClick (View v){
-<<<<<<< HEAD
-=======
+
                 Util.playWavSound(getApplicationContext(), "select");
->>>>>>> d2d7456361245f8b46b75d161752f3269154b15b
 
                 //Call to new browser Activity, when button is pressed.
                 //Todo: fix error regarding pressing back arrow button (<|) when playing game
