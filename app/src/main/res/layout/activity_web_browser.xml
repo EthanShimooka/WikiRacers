@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,85 +11,84 @@
     android:weightSum="1"
     android:background="@drawable/bg_theme_frame1">
 
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Build"
+            android:id="@+id/browser_webView_Header"
+            android:textSize="8sp"
+            />
+
+        <WebView
+            android:layout_width="match_parent"
+            android:layout_height="460dp"
+            android:id="@+id/browser_webView_Window" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/browser_webView_Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/webview_target_url"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:clickable="false"
+                android:maxWidth="250dp" />
+
+            <!-- todo: make this always show up, even if the target has a big name -->
+
+            <Button
+                android:id="@+id/openpopup"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:text="@string/pause_button_text" />
+
+            <Button
+                android:id="@+id/browser_webView_Back_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/openpopup"
+                android:layout_toStartOf="@+id/openpopup"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:text="@string/Browser_Button_Backtrack"
+                android:textColor="#fffcf2ff"
+                android:textSize="30sp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <fragment
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Build"
-        android:id="@+id/browser_webView_Header"
-        android:textSize="8sp"
-        />
+        android:name="wikiracers.wikiracers.WebBrowserScoreFrag"
+        android:id="@+id/fragment"
+        android:layout_gravity="right"
+        android:layout_alignWithParentIfMissing="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="211dp"
+        android:layout_alignParentRight="true" />
 
 
-    <WebView
-        android:layout_width="match_parent"
-        android:layout_height="460dp"
-        android:id="@+id/browser_webView_Window" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/browser_webView_Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/webview_target_url"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingEnd="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:clickable="false"
-            android:maxWidth="250dp" />
-
-        <!-- todo: make this always show up, even if the target has a big name -->
-
-        <TextView
-            android:id="@+id/countView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/browser_webView_Text"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_gravity="bottom"
-            android:text="@string/count_text"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <TextView
-            android:id="@+id/countView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/countView"
-            android:layout_toRightOf="@+id/countView"
-            android:layout_below="@+id/browser_webView_Text"
-            android:text="0"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <Button
-            android:id="@+id/openpopup"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:text="@string/pause_button_text" />
-
-        <Button
-            android:id="@+id/browser_webView_Back_Button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_toLeftOf="@+id/openpopup"
-            android:layout_toStartOf="@+id/openpopup"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:text="@string/Browser_Button_Backtrack"
-            android:textColor="#fffcf2ff"
-            android:textSize="30sp" />
-
-    </RelativeLayout>
-</LinearLayout>
+</RelativeLayout>
