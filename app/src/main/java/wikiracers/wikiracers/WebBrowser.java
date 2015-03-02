@@ -79,11 +79,13 @@ public class WebBrowser extends Activity {
         mWebView.getSettings().setJavaScriptEnabled(true);
         //Sets Starting URL
         if (currentURL.equals("")) {
-            mWebView.loadUrl("http://en.wikipedia.org/wiki/Special:Random");
+            //mWebView.loadUrl("http://en.wikipedia.org/wiki/Special:Random");
+            mWebView.loadUrl("http://en.wikipedia.org/wiki/" + Util.get_dictionary_word(getApplicationContext()));
         }
         else{
             //booted up already started game
             mWebView.loadUrl(currentURL);
+            Util.remove_html_elements(mWebView);
             targetPageText.setText(Util.get_page_title(target_URL));
             countText.setText(String.valueOf(pageCount));
             peekMode = false;
@@ -98,18 +100,21 @@ public class WebBrowser extends Activity {
             @Override
             public void onPageFinished(WebView view, String url){
                 super.onPageFinished(view, url);
+                Util.remove_html_elements(mWebView);
+
                 if(peekMode){
 
                 }
                 else{backSwitch = true;
                     if (!url.equals(currentURL)) {
                         currentURL = url;
-<<<<<<< HEAD
-                        Util.remove_html_elements(mWebView);
-=======
->>>>>>> d2d7456361245f8b46b75d161752f3269154b15b
+
                         if(gameRun) {
                             pageCount++;
+
+                            if (list_URL.contains(currentURL) == false)
+                               Util.playWavSound(getApplicationContext(), "right");
+
                         }
                         Log.d("game", url + " ~ " + String.valueOf(pageCount) + "target:" + target_URL + " start:" + startingURL);
                         countText.setText(String.valueOf(pageCount));
@@ -128,6 +133,7 @@ public class WebBrowser extends Activity {
                         }
                         if(startingURL.equals("") && !url.equals("http://en.m.wikipedia.org/wiki/Special:Random")){
                             mWebView.loadUrl("http://en.m.wikipedia.org/wiki/Special:Random");
+                            mWebView.loadUrl("http://en.wikipedia.org/wiki/" + Util.get_dictionary_word(getApplicationContext()));
                             startingURL = url;
                         }
                         else if(target_URL.equals("") && !url.equals("http://en.m.wikipedia.org/wiki/Special:Random")){
@@ -144,14 +150,24 @@ public class WebBrowser extends Activity {
                         }else if (gameStart){
                             //Todo: test this (play the game all the way through)
                             list_URL.add(url);
+
+
+
                         }
                     }
                 }
             }
+
+            //Run for a successfully loaded window in webview
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon){
                 backSwitch = false; //to prevent cancelling a load
                 super.onPageStarted(view,url,favicon);
+
+                //Conditionals to check for link pressing sound
+                //if (backSwitch == true)
+                //   Util.playWavSound(getApplicationContext(), "right");
+
             }
         });
 
@@ -162,11 +178,8 @@ public class WebBrowser extends Activity {
         View.OnClickListener listen = new View.OnClickListener(){
             @Override
             public void onClick(View view){
-<<<<<<< HEAD
-=======
                 Util.playWavSound(getApplicationContext(), "wrong");
 
->>>>>>> d2d7456361245f8b46b75d161752f3269154b15b
                 if (view == webBack){
                     Log.d("game", "back clicked");
                     if(backSwitch){Log.d("game","backswitch true");}
@@ -204,11 +217,9 @@ public class WebBrowser extends Activity {
 
             @Override
             public void onClick(View arg0) {
-<<<<<<< HEAD
-=======
+
                 Util.playWavSound(getApplicationContext(), "select");
 
->>>>>>> d2d7456361245f8b46b75d161752f3269154b15b
                 LayoutInflater layoutInflater
                         = (LayoutInflater)getBaseContext()
                         .getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -226,11 +237,9 @@ public class WebBrowser extends Activity {
                     public void onClick(View v) {
                         // TODO Auto-generated method stub
                         popupWindow.dismiss();
-<<<<<<< HEAD
-=======
+
                         Util.playWavSound(getApplicationContext(), "wrong");
 
->>>>>>> d2d7456361245f8b46b75d161752f3269154b15b
                     }});
                 //can be any resource apparently
                 popupWindow.showAtLocation(findViewById(R.id.browser_webView_Text) ,
