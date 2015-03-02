@@ -97,12 +97,9 @@ public class Util {
 
 
 
-
-
-
-
-
        //Function for playing various a sound clips
+       //TODO: Check for leaks
+
 
        public static void playWavSound(Context context, String sound_file) {
            MediaPlayer mp;
@@ -115,6 +112,13 @@ public class Util {
                mp = MediaPlayer.create(context,R.raw.sfx_select );
            }
            mp.start();
+           if(mp!=null)
+           {
+               if(!(mp.isPlaying())){
+                   mp.stop();
+                   mp.release();
+               }
+           }
     }
 
 
