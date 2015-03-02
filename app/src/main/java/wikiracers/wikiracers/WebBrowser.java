@@ -38,7 +38,7 @@ import java.util.List;
 public class WebBrowser extends Activity {
 
     private WebView mWebView;  //New Webview Element
-    static int pageCount = 0;
+    static int pageCount = -1;
     static String currentURL = "";
     static String startingURL = "";
     static String target_URL = "";
@@ -118,7 +118,9 @@ public class WebBrowser extends Activity {
                         Log.d("game", url + " ~ " + String.valueOf(pageCount) + "target:" + target_URL + " start:" + startingURL);
                         countText.setText(String.valueOf(pageCount));
                         backSwitch = true;
+                        //win condition
                         if (Util.get_page_title(url).equals(target_URL)){
+                            Util.update_db(pageCount);
                             startActivity(new Intent(getApplicationContext(), WinnerPage.class));
                             list_URL.add(url);
                             TextView url_target = (TextView) findViewById(R.id.browser_webView_Text);
@@ -130,6 +132,7 @@ public class WebBrowser extends Activity {
                             Log.d("path", "url: " + url);
                             gameRun = gameStart = false; //allows player to browse around post game without messing with stats
                         }
+                        //game is initialized here
                         if(startingURL.equals("") && !url.equals("http://en.m.wikipedia.org/wiki/Special:Random")){
                             mWebView.loadUrl("http://en.m.wikipedia.org/wiki/Special:Random");
                             startingURL = url;
@@ -143,7 +146,7 @@ public class WebBrowser extends Activity {
                             target_URL = Util.get_page_title(url);
                             target_URL_full = url;
                             mWebView.loadUrl(startingURL);
-                            pageCount = 0;
+                            pageCount = -1;
                             gameStart = gameRun = true;
                         }else if (gameStart){
                             //Todo: test this (play the game all the way through)
@@ -179,13 +182,21 @@ public class WebBrowser extends Activity {
                 Util.playWavSound(getApplicationContext(), "wrong");
 
                 if (view == webBack){
-                    Log.d("game", "back clicked");
-                    if(backSwitch){Log.d("game","backswitch true");}
-                    if(mWebView.canGoBack()){Log.d("game","GoBack true");}
-                    if(mWebView.canGoBack() && backSwitch){
-                        Log.d("game", "going back");
-                        backSwitch = false;
-                        mWebView.goBack();
+                    if (!peekMode) {
+                        Log.d("game", "back clicked");
+                        if (backSwitch) {
+                            Log.d("game", "backswitch true");
+                        }
+                        if (mWebView.canGoBack()) {
+                            Log.d("game", "GoBack true");
+                        }
+                        if (mWebView.canGoBack() && backSwitch) {
+                            Log.d("game", "going back");
+                            backSwitch = false;
+                            mWebView.goBack();
+                        }
+                    }else{
+                        targetPageText.performClick();
                     }
                 }
                 else if (view == targetPageText){
@@ -206,6 +217,20 @@ public class WebBrowser extends Activity {
 
         loadPop();
 
+    }
+
+    public void resetGame(){
+        pageCount = -1;
+        currentURL = "";
+        startingURL = "";
+        target_URL = "";
+        target_URL_full = "";
+        list_URL.clear();
+        gameStart = false;
+        gameRun = false; // might be the same as gameStart
+        peekMode = false; // toggles when the user is playing or looking at target
+        backSwitch = true;
+        mWebView.loadUrl("http://en.wikipedia.org/wiki/Special:Random");
     }
 
     private void loadPop(){
@@ -239,6 +264,12 @@ public class WebBrowser extends Activity {
                         Util.playWavSound(getApplicationContext(), "wrong");
 
                     }});
+                Button reset = (Button)popupView.findViewById(R.id.pop_restart);
+                reset.setOnClickListener(new Button.OnClickListener() {
+                    @Override
+                    public void onClick(View v){
+                    resetGame();
+                }});
                 //can be any resource apparently
                 popupWindow.showAtLocation(findViewById(R.id.browser_webView_Text) ,
                         Gravity.CENTER, 0, 0);

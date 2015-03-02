@@ -1,5 +1,7 @@
 package wikiracers.wikiracers;
 
+
+import com.parse.ParseUser;
 import android.content.Context;
 
 import android.net.ConnectivityManager;
@@ -59,6 +61,18 @@ public class Util {
         return page_title;
     }
 
+    public static boolean update_db(int steps){
+        ParseUser currentUser = ParseUser.getCurrentUser();
+
+        //check if the user is logged in
+        if (currentUser != null){
+            currentUser.increment("numFinishedGames");
+            currentUser.increment("numTotalSteps", steps);
+            currentUser.saveInBackground();
+            return true;
+        }
+        else{return false;}
+    }
 
     public static void remove_html_elements(WebView mWebView){
         //Removes Search bar
