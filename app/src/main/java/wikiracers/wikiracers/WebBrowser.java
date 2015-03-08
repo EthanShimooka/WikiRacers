@@ -101,8 +101,9 @@ public class WebBrowser extends Activity {
             public void onPageFinished(WebView view, String url){
                 super.onPageFinished(view, url);
                 Util.remove_html_elements(mWebView);
-
                 if(peekMode){
+
+                }else if(!Util.check_url(url)){
 
                 }
                 else{backSwitch = true;
@@ -132,7 +133,7 @@ public class WebBrowser extends Activity {
                             gameRun = gameStart = false; //allows player to browse around post game without messing with stats
                         }
                         if(startingURL.equals("") && !url.equals("http://en.m.wikipedia.org/wiki/Special:Random")){
-                            mWebView.loadUrl("http://en.m.wikipedia.org/wiki/Special:Random");
+                            //mWebView.loadUrl("http://en.m.wikipedia.org/wiki/Special:Random");
                             mWebView.loadUrl("http://en.wikipedia.org/wiki/" + Util.get_dictionary_word(getApplicationContext()));
                             startingURL = url;
                         }

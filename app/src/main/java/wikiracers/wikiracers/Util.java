@@ -59,6 +59,11 @@ public class Util {
         return page_title;
     }
 
+    public static boolean check_url(String url){
+        int get_last_slash = url.lastIndexOf('/');
+        String base_url = url.substring(0, get_last_slash);
+        return base_url == "http://en.m.wikipedia.org/wiki/";
+    }
 
     public static void remove_html_elements(WebView mWebView){
         //Removes Search bar
@@ -68,11 +73,16 @@ public class Util {
         //Removes Watch page and edit page icons at the top of the page
         mWebView.loadUrl("javascript:(function() { " + "document.getElementById('page-actions').style.display = 'none'; " + "})()");
         //Removes edit page icons throughout the page
-        mWebView.loadUrl("javascript:(function() { " + "document.getElementsByClassName('icon icon-edit-enabled edit-page icon-32px').style.display = 'none'; " + "})()");
+        mWebView.loadUrl("javascript:(function() { " + "document.getElementsByClassName('icon icon-edit-enabled edit-page icon-32px')[0].style.display = 'none'; " + "})()");
         //Removes "Read in another language" button
-        mWebView.loadUrl("javascript:(function() { " + "document.getElementByClassName('languageSelector mw-ui-button button').style.display = 'none'; " + "})()");
+        mWebView.loadUrl("javascript:(function() { " + "document.getElementById('page-secondary-actions').style.display = 'none'; " + "})()");
         //Removes Footer
         mWebView.loadUrl("javascript:(function() { " + "document.getElementById('footer').style.display = 'none'; " + "})()");
+
+        mWebView.loadUrl("javascript:(function() { " + "var block_name = document.getElementById('References');" +
+        "var block = block_name.parentElement;" + "var control = block.getAttribute('aria-controls');" +
+        "control.style.display = 'none';" + "})()"
+        );
     }
 
     public static String get_dictionary_word(Context myContext){
@@ -85,7 +95,7 @@ public class Util {
             {
                 ++n;
                 String line = sc.nextLine();
-                if((int) (Math.random() * n) == 0)
+                if(rand.nextInt(n) == 0)
                     word = line;
             }
         } catch (IOException e) {
