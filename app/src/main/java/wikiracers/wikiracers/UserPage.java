@@ -89,7 +89,10 @@ public class UserPage extends Activity {
         worldAttemptsView.setText(worldAttempts.toString());
 
         //WLR
-        double WLR = totalWins.doubleValue()/attempts.doubleValue();
+        double WLR = 0.0;
+        if (attempts.doubleValue() >= .8){
+            WLR = totalWins.doubleValue()/attempts.doubleValue();
+        }
         WLR = (double)Math.round(WLR * 100) / 100;
         TextView WLRView = (TextView) findViewById(R.id.WLR);
         WLRView.setText(String.valueOf(WLR));
