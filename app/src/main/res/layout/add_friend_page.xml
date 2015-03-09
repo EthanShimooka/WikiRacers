@@ -46,10 +46,9 @@
         android:text="Friends"
         android:id="@+id/textView2" />
 
-    <TableRow
-        android:layout_width="match_parent"
+    <ListView
+        android:layout_width="368dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/friendTable"></TableRow>
+        android:id="@+id/friendList" />
 
 </LinearLayout>
