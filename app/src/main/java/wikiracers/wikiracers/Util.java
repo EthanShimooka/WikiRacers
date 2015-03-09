@@ -1,6 +1,7 @@
 package wikiracers.wikiracers;
 
 
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 import android.content.Context;
 
@@ -61,9 +62,28 @@ public class Util {
         return page_title;
     }
 
-    public static boolean update_db(int steps){
-        ParseUser currentUser = ParseUser.getCurrentUser();
+    public static boolean db_increase_attempts(){
+        ParseObject stats = ParseObject.createWithoutData("Stats", "BxJpCqZSCh");
+        stats.increment("attempts");
+        stats.saveInBackground();
 
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        //check if the user is logged in
+        if (currentUser != null){
+            currentUser.increment("numAttemptedGames");
+            currentUser.saveInBackground();
+            return true;
+        }
+        else{return false;}
+    }
+
+    public static boolean update_db(int steps){
+        ParseObject stats = ParseObject.createWithoutData("Stats", "BxJpCqZSCh");
+        stats.increment("wins");
+        stats.increment("moves", steps);
+        stats.saveInBackground();
+
+        ParseUser currentUser = ParseUser.getCurrentUser();
         //check if the user is logged in
         if (currentUser != null){
             currentUser.increment("numFinishedGames");

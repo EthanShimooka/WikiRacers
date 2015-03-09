@@ -92,7 +92,8 @@
                 android:gravity="end"
                 android:padding="3dip"
                 android:layout_margin="2dp"
-                android:background="#000000"/>
+                android:background="#000000"
+                android:id="@+id/world_wins"/>
         </TableRow>
 
         <TableRow>
@@ -113,7 +114,8 @@
                 android:gravity="end"
                 android:padding="3dip"
                 android:layout_margin="2dp"
-                android:background="#000000"/>
+                android:background="#000000"
+                android:id="@+id/world_moves"/>
         </TableRow>
 
         <TableRow>
@@ -149,13 +151,15 @@
                 android:gravity="center"
                 android:padding="3dip"
                 android:layout_margin="2dp"
-                android:background="#000000"/>
+                android:background="#000000"
+                android:id="@+id/attempts"/>
             <TextView
                 android:text="@string/dot_dot_dot"
                 android:gravity="end"
                 android:padding="3dip"
                 android:layout_margin="2dp"
-                android:background="#000000"/>
+                android:background="#000000"
+                android:id="@+id/world_attempts"/>
         </TableRow>
 
         <TableRow>
@@ -169,7 +173,8 @@
                 android:gravity="center"
                 android:padding="3dip"
                 android:layout_margin="2dp"
-                android:background="#000000"/>
+                android:background="#000000"
+                android:id="@+id/WLR"/>
             <TextView
                 android:text="@string/dot_dot_dot"
                 android:gravity="end"

@@ -54,19 +54,12 @@ public class WebBrowser extends Activity {
 
         //Determine screen size
         if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE) {
-            Toast.makeText(this, "Large screen", Toast.LENGTH_LONG).show();
             setContentView(R.layout.activity_web_browser_large);
         }
         else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
-            Toast.makeText(this, "Normal sized screen", Toast.LENGTH_LONG).show();
-            setContentView(R.layout.activity_web_browser);
-        }
-        else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {
-            Toast.makeText(this, "Small sized screen", Toast.LENGTH_LONG).show();
             setContentView(R.layout.activity_web_browser);
         }
         else {
-            Toast.makeText(this, "Screen size is neither large, normal or small", Toast.LENGTH_LONG).show();
             setContentView(R.layout.activity_web_browser);
         }
         final TextView countText = (TextView) findViewById(R.id.countView2);
@@ -110,7 +103,9 @@ public class WebBrowser extends Activity {
                         Util.remove_html_elements(mWebView);
                         if(gameRun) {
                             pageCount++;
-
+                            if (pageCount == 1){
+                                Util.db_increase_attempts();
+                            }
                             if (list_URL.contains(currentURL) == false)
                                Util.playWavSound(getApplicationContext(), "right");
 

@@ -30,7 +30,7 @@
     <string name="WLR_text">Win/Lose Ratio</string>
     <string name="wins_text">Wins</string>
     <string name="user_text">User</string>
-    <string name="world_average_text">World Average</string>
+    <string name="world_average_text">World</string>
     <string name="add_friend_text">Add Friend</string>
     <string name="dot_dot_dot">...</string>
     <string name="original_phone_string">No Phone Number</string>
@@ -38,6 +38,6 @@
     <string name="original_email_text">email</string>
     <string name="original_username_text">username</string>
     <string name="total_steps_text">Total Steps</string>
-    <string name="average_steps_text">Average Steps</string>
+    <string name="average_steps_text">Average Steps to Win</string>
 
 </resources>
