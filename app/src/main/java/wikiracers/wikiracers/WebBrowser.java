@@ -103,8 +103,6 @@ public class WebBrowser extends Activity {
                 Util.remove_html_elements(mWebView);
                 if(peekMode){
 
-                }else if(!Util.check_url(url)){
-
                 }
                 else{backSwitch = true;
                     if (!url.equals(currentURL)) {
@@ -120,7 +118,7 @@ public class WebBrowser extends Activity {
                         Log.d("game", url + " ~ " + String.valueOf(pageCount) + "target:" + target_URL + " start:" + startingURL);
                         countText.setText(String.valueOf(pageCount));
                         backSwitch = true;
-                        if (Util.get_page_title(url).equals(target_URL)){
+                        if (Util.get_page_title(url).equals(target_URL) && !peekMode){
                             startActivity(new Intent(getApplicationContext(), WinnerPage.class));
                             list_URL.add(url);
                             TextView url_target = (TextView) findViewById(R.id.browser_webView_Text);
@@ -133,8 +131,8 @@ public class WebBrowser extends Activity {
                             gameRun = gameStart = false; //allows player to browse around post game without messing with stats
                         }
                         if(startingURL.equals("") && !url.equals("http://en.m.wikipedia.org/wiki/Special:Random")){
-                            //mWebView.loadUrl("http://en.m.wikipedia.org/wiki/Special:Random");
-                            mWebView.loadUrl("http://en.wikipedia.org/wiki/" + Util.get_dictionary_word(getApplicationContext()));
+                            mWebView.loadUrl("http://en.m.wikipedia.org/wiki/Special:Random");
+                            //mWebView.loadUrl("http://en.wikipedia.org/wiki/" + Util.get_dictionary_word(getApplicationContext()));
                             startingURL = url;
                         }
                         else if(target_URL.equals("") && !url.equals("http://en.m.wikipedia.org/wiki/Special:Random")){
@@ -143,10 +141,13 @@ public class WebBrowser extends Activity {
 
                             //TODO: Check if the string parse works                                                                      ///*
                             url_target.setText(Util.textFormat( Util.get_page_title(url)));
-                            target_URL = Util.get_page_title(url);
-                            target_URL_full = url;
+                            //target_URL = Util.get_page_title(url);
+                            //target_URL_full = url;
+                            target_URL = Util.get_dictionary_word(getApplicationContext());
+                            target_URL_full = "http://en.m.wikipedia.org/wiki/" + target_URL;
+                            url_target.setText(Util.textFormat( target_URL));
                             mWebView.loadUrl(startingURL);
-                            pageCount = 0;
+                            pageCount = -1;
                             gameStart = gameRun = true;
                         }else if (gameStart){
                             //Todo: test this (play the game all the way through)

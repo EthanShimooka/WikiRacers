@@ -101,6 +101,7 @@ public class Util {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        word = word.substring(0,1).toUpperCase() + word.substring(1);
         return word;
     }
 
