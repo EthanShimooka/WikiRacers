@@ -129,21 +129,34 @@
         android:ems="10"
         android:inputType="textPassword" />
 
-    <Button
-        android:id="@+id/create_button"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edit_password"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="94dp"
-        android:text="@string/create_text" />
+        android:id="@+id/button_layout"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/create_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create_text" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:id="@+id/backButton" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/main_menu_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/create_button"
+        android:layout_below="@+id/button_layout"
         android:text="@string/main_menu_button_text" />
 
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package wikiracers.wikiracers;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -80,6 +81,32 @@ public class FriendPage extends Activity{
         addFriendBttn.setOnClickListener(listen);
         ParseQuery<ParseObject> findFriends = ParseQuery.getQuery("Friends");
         findFriends.whereEqualTo("Friend", ParseUser.getCurrentUser());
+
+        //back button
+        Button backButton = (Button) findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View v){
+
+                Util.playWavSound(getApplicationContext(), "select");
+
+                //Call to new browser Activity, when button is pressed.
+                //Todo: fix error regarding pressing back arrow button (<|) when playing game
+                startActivity(new Intent(getApplicationContext(), SettingsPage.class));
+            }
+        });
+
+        //menu button
+        Button menuButton = (Button) findViewById(R.id.menuButton);
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View v){
+
+                Util.playWavSound(getApplicationContext(), "select");
+
+                //Call to new browser Activity, when button is pressed.
+                //Todo: fix error regarding pressing back arrow button (<|) when playing game
+                startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+            }
+        });
 
         findFriends.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> parseObjects, ParseException e) {

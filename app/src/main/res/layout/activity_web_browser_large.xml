@@ -50,8 +50,7 @@
                 android:background="#ffffe3f5"
                 android:layout_marginTop="8dp"
                 android:layout_marginLeft="5dp"
-                android:backgroundTint="#ffffa2a9"
-                android:backgroundTintMode="multiply"
+                android:backgroundTint="#ff3647ff"
                 android:alpha=".81"
                 android:autoText="true" />
 

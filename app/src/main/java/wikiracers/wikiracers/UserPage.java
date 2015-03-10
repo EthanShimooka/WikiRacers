@@ -14,7 +14,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,13 +26,10 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserPage extends Activity {
-
-    Integer worldAttempts = 0;
-    Integer worldWins = 0;
-    Integer worldMoves = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +45,53 @@ public class UserPage extends Activity {
         Integer totalWins = currentUser.getInt("numFinishedGames");
         Integer totalSteps = currentUser.getInt("numTotalSteps");
 
-        //global stats
+        //get and set global stats
+        ParseQuery<ParseObject> getStats = ParseQuery.getQuery("Stats");
+        getStats.whereEqualTo("objectId", "BxJpCqZSCh");
+        getStats.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> parseObjects, com.parse.ParseException e) {
+                if (parseObjects == null) {
+                    //no stats found
+                } else {
+                    //stats found
+                    Integer world_moves = 0;
+                    Integer world_attempts = 0;
+                    Integer world_wins = 0;
+                    for (ParseObject po : parseObjects){
+                        world_moves = po.getInt("moves");
+                        world_attempts = po.getInt("attempts");
+                        world_wins = po.getInt("wins");
+                    }
+                    //moves
+                    TextView worldMovesView = (TextView) findViewById(R.id.world_moves);
+                    worldMovesView.setText(world_moves.toString());
+                    //wins
+                    TextView worldWinsView = (TextView) findViewById(R.id.world_wins);
+                    worldWinsView.setText(world_wins.toString());
+                    //atempts
+                    TextView worldAttemptsView = (TextView) findViewById(R.id.world_attempts);
+                    worldAttemptsView.setText(world_attempts.toString());
+                    //avg moves
+                    TextView worldAvgStepsView = (TextView) findViewById(R.id.world_avg_steps);
+                    if(world_moves == 0){worldAvgStepsView.setText("0");}
+                    else{
+                        double avgSteps = world_moves.doubleValue()/world_wins.doubleValue();
+                        avgSteps = (double)Math.round(avgSteps * 100) / 100;
+                        worldAvgStepsView.setText(String.valueOf(avgSteps));
+                    }
+                    //WLR
+                    double WLR = 0.0;
+                    if (world_attempts.doubleValue() >= .8){
+                        WLR = world_wins.doubleValue()/world_attempts.doubleValue();
+                    }
+                    WLR = (double)Math.round(WLR * 100) / 100;
+                    TextView WLRView = (TextView) findViewById(R.id.world_WLR);
+                    WLRView.setText(String.valueOf(WLR));
+                }
+            }
+        });
 
+        //set personal info
         TextView usernameTextView=(TextView)findViewById(R.id.username);
         usernameTextView.setText(username);
         TextView emailTextView=(TextView)findViewById(R.id.email);
@@ -61,18 +105,13 @@ public class UserPage extends Activity {
             phoneTextView.setText(phone);
         }
 
+        //set stats
         //moves
         TextView totalStep = (TextView) findViewById(R.id.total_steps);
         totalStep.setText(totalSteps.toString());
-        TextView worldMovesView = (TextView) findViewById(R.id.world_moves);
-        worldMovesView.setText(worldMoves.toString());
-
         //wins
         TextView totalWinsView = (TextView) findViewById(R.id.num_wins);
         totalWinsView.setText(totalWins.toString());
-        TextView worldWinsView = (TextView) findViewById(R.id.world_wins);
-        worldWinsView.setText(worldWins.toString());
-
         //avg moves
         TextView avgStepsView = (TextView) findViewById(R.id.avg_steps);
         if(totalSteps == 0){avgStepsView.setText("0");}
@@ -81,13 +120,9 @@ public class UserPage extends Activity {
             avgSteps = (double)Math.round(avgSteps * 100) / 100;
             avgStepsView.setText(String.valueOf(avgSteps));
         }
-
         //attempts
         TextView attemptsView = (TextView) findViewById(R.id.attempts);
         attemptsView.setText(attempts.toString());
-        TextView worldAttemptsView = (TextView) findViewById(R.id.world_attempts);
-        worldAttemptsView.setText(worldAttempts.toString());
-
         //WLR
         double WLR = 0.0;
         if (attempts.doubleValue() >= .8){
@@ -96,6 +131,7 @@ public class UserPage extends Activity {
         WLR = (double)Math.round(WLR * 100) / 100;
         TextView WLRView = (TextView) findViewById(R.id.WLR);
         WLRView.setText(String.valueOf(WLR));
+
         //logout button
         findViewById(R.id.logout_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

@@ -137,7 +137,8 @@
                 android:gravity="end"
                 android:padding="3dip"
                 android:layout_margin="2dp"
-                android:background="#000000"/>
+                android:background="#000000"
+                android:id="@+id/world_avg_steps"/>
         </TableRow>
 
         <TableRow>
@@ -180,7 +181,8 @@
                 android:gravity="end"
                 android:padding="3dip"
                 android:layout_margin="2dp"
-                android:background="#000000"/>
+                android:background="#000000"
+                android:id="@+id/world_WLR"/>
         </TableRow>
 
     </TableLayout>

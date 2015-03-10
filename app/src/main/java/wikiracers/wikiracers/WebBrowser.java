@@ -259,6 +259,19 @@ public class WebBrowser extends Activity {
                         Util.playWavSound(getApplicationContext(), "wrong");
 
                     }});
+
+                Button settingButton = (Button) popupView.findViewById(R.id.pop_settings);
+                settingButton.setOnClickListener(new View.OnClickListener() {
+                    public void onClick (View v){
+
+                        Util.playWavSound(getApplicationContext(), "select");
+
+                        //Call to new browser Activity, when button is pressed.
+                        //Todo: fix error regarding pressing back arrow button (<|) when playing game
+                        startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+                    }
+                });
+
                 Button reset = (Button)popupView.findViewById(R.id.pop_restart);
                 reset.setOnClickListener(new Button.OnClickListener() {
                     @Override

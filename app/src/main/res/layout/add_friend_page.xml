@@ -37,6 +37,26 @@
                 android:id="@+id/addFriendButton" />
         </LinearLayout>
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:weightSum="1">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Back"
+                android:id="@+id/backButton" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/backButton"
+                android:text="Menu"
+                android:id="@+id/menuButton" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <TextView
