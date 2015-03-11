@@ -1,8 +1,5 @@
 package wikiracers.wikiracers;
 
-
-import com.parse.ParseObject;
-import com.parse.ParseUser;
 import android.content.Context;
 
 import android.net.ConnectivityManager;
@@ -62,36 +59,10 @@ public class Util {
         return page_title;
     }
 
-    public static boolean db_increase_attempts(){
-        ParseObject stats = ParseObject.createWithoutData("Stats", "BxJpCqZSCh");
-        stats.increment("attempts");
-        stats.saveInBackground();
-
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        //check if the user is logged in
-        if (currentUser != null){
-            currentUser.increment("numAttemptedGames");
-            currentUser.saveInBackground();
-            return true;
-        }
-        else{return false;}
-    }
-
-    public static boolean update_db(int steps){
-        ParseObject stats = ParseObject.createWithoutData("Stats", "BxJpCqZSCh");
-        stats.increment("wins");
-        stats.increment("moves", steps);
-        stats.saveInBackground();
-
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        //check if the user is logged in
-        if (currentUser != null){
-            currentUser.increment("numFinishedGames");
-            currentUser.increment("numTotalSteps", steps);
-            currentUser.saveInBackground();
-            return true;
-        }
-        else{return false;}
+    public static boolean check_url(String url){
+        int get_last_slash = url.lastIndexOf('/');
+        String base_url = url.substring(0, get_last_slash);
+        return base_url == "http://en.m.wikipedia.org/wiki/";
     }
 
     public static void remove_html_elements(WebView mWebView){
@@ -102,14 +73,19 @@ public class Util {
         //Removes Watch page and edit page icons at the top of the page
         mWebView.loadUrl("javascript:(function() { " + "document.getElementById('page-actions').style.display = 'none'; " + "})()");
         //Removes edit page icons throughout the page
-        mWebView.loadUrl("javascript:(function() { " + "document.getElementsByClassName('icon icon-edit-enabled edit-page icon-32px').style.display = 'none'; " + "})()");
+        mWebView.loadUrl("javascript:(function() { " + "document.getElementsByClassName('icon icon-edit-enabled edit-page icon-32px')[0].style.display = 'none'; " + "})()");
         //Removes "Read in another language" button
-        mWebView.loadUrl("javascript:(function() { " + "document.getElementByClassName('languageSelector mw-ui-button button').style.display = 'none'; " + "})()");
+        mWebView.loadUrl("javascript:(function() { " + "document.getElementById('page-secondary-actions').style.display = 'none'; " + "})()");
         //Removes Footer
         mWebView.loadUrl("javascript:(function() { " + "document.getElementById('footer').style.display = 'none'; " + "})()");
+
+        mWebView.loadUrl("javascript:(function() { " + "var block_name = document.getElementById('References');" +
+        "var block = block_name.parentElement;" + "var control = block.getAttribute('aria-controls');" +
+        "control.style.display = 'none';" + "})()"
+        );
     }
 
-    public String get_dictionary_word(Context myContext){
+    public static String get_dictionary_word(Context myContext){
         String word = null;
         Random rand = new Random();
         try {
@@ -125,6 +101,7 @@ public class Util {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        word = word.substring(0,1).toUpperCase() + word.substring(1);
         return word;
     }
 
