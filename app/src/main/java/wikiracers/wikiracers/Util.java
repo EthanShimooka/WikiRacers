@@ -16,6 +16,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 
+import com.parse.ParseUser;
+
 
 /**
  * =========================================
@@ -28,15 +30,33 @@ import android.net.Uri;
  * or those too cumbersome to implement in Activity
  * classes are to be represented here.
  *
+ *   Util Methods:
+ *
+ *   public static String textFormat(String input_string)
+ *
+ *   public static String get_page_title(String url)
+ *
+ *   public static String get_page_title(String url)
+ *
+ *   public static boolean check_url(String url)
+ *
+ *   public static void remove_html_elements(WebView mWebView)
+ *
+ *   public static String get_dictionary_word
+ *
+ *   public static String currentUserString(ParseUser currentUser)
+ *
+ *   public static void playWavSound(Context context, String sound_file)
+ *
  * =========================================
  */
 public class Util {
 
 
+    // textFormat()
     // Function to format wikipedia strings with underscores to white spaces.
     // Takes (STRING) and returns (STRING)
 
-    //TODO: Test module
     public static String textFormat(String input_string){
 
         String formatted_string = "";
@@ -49,7 +69,7 @@ public class Util {
     }
 
 
-    //Todo:Check that there are no conflicts
+    // get_page_title()
     // Function to fetch specified URL
 
     public static String get_page_title(String url){
@@ -85,6 +105,10 @@ public class Util {
         );
     }
 
+
+    // get_dictionary_word()
+    // Searches for simplified dictionary word
+
     public static String get_dictionary_word(Context myContext){
         String word = null;
         Random rand = new Random();
@@ -106,30 +130,39 @@ public class Util {
     }
 
 
+    // currentUserString ()
+    // Accepts a ParseUser profile and extracts and returns a string value associated with
+    // said profile
+
+    public static String currentUserString(ParseUser currentUser) {
+        String currentUserString;
+
+        currentUserString = currentUser.getUsername();
+        return currentUserString;
+    }
+
 
 
        //Function for playing various a sound clips
-       //TODO: Check for leaks
 
+    public static void playWavSound(Context context, String sound_file) {
+        MediaPlayer mp;
 
-       public static void playWavSound(Context context, String sound_file) {
-           MediaPlayer mp;
+        if (sound_file == "right"){
+           mp = MediaPlayer.create(context,R.raw.sfx_right );
+        }else if (sound_file == "wrong"){
+           mp = MediaPlayer.create(context,R.raw.sfx_wrong );
+        }else{
+           mp = MediaPlayer.create(context,R.raw.sfx_select );
+        }
 
-           if (sound_file == "right"){
-              mp = MediaPlayer.create(context,R.raw.sfx_right );
-           }else if (sound_file == "wrong"){
-              mp = MediaPlayer.create(context,R.raw.sfx_wrong );
-             }else{
-               mp = MediaPlayer.create(context,R.raw.sfx_select );
-           }
-           mp.start();
-           if(mp!=null)
-           {
-               if(!(mp.isPlaying())){
-                   mp.stop();
-                   mp.release();
-               }
-           }
+        mp.start();
+        if(mp!=null)  {
+          if(!(mp.isPlaying())){
+            mp.stop();
+            mp.release();
+            }
+        }
     }
 
 

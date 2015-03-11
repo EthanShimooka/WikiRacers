@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="winnerbuttonmessage">Main Menu</string>
+    <string name="winnerbuttonmessagestats">info</string>
+    <string name="winnertitlemessage">YOU WIN WIKIRACERS</string>
 </resources>

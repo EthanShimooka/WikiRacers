@@ -13,20 +13,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="YOU WIN WIKIRACE"
+            android:text="@string/winnertitlemessage"
             android:id="@+id/textView10"
-            android:textSize="70dp" />
+            android:textSize="50sp"
+            android:textStyle="italic" />
 
         <TextView
             android:id="@+id/scroll"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             />
+
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Main Menu"
             android:id="@+id/menu_button"/>
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/winnerbuttonmessagestats"
+            android:id="@+id/statisticsbutton"/>
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/winnerbuttonmessagescore"
+            android:id="@+id/hiscorebutton"/>
     </LinearLayout>
 
 </ScrollView>

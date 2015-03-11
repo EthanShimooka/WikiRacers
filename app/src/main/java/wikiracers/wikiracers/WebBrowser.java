@@ -1,8 +1,3 @@
-/* WikiRacers - Web Browser Activity
- *
- *
- *
- * */
 package wikiracers.wikiracers;
 
 import android.app.Activity;
@@ -25,15 +20,39 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.ParseUser;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-/////////////////////////////////////////////
-//test with git
+/**
+ * =========================================
+ * Project : WikiRacers
+ *
+ * Class WebBrowser
+ *
+ *   Game loop implemented in WebBrowser class. Contains
+ *   popup and menu fragments as children of activity.
+ *
+ *   WebBrowser Methods Index :
+ *
+ *     public void resetGame()
 
-
-//WebBrowser class
+ *     private void loadPop()
+ *
+ *     private void changeUserText()
+ *
+ *     ***
+ *
+ * Class mWebViewClient
+ *
+ *      private class mWebViewClient extends WebViewClient
+ *
+ *     ***
+ *
+ * =========================================
+ */
 
 public class WebBrowser extends Activity {
 
@@ -209,45 +228,79 @@ public class WebBrowser extends Activity {
         targetPageText.setOnClickListener(listen);
 
         loadPop();
+        changeUserText();
 
     }
 
-    private void loadPop(){
 
+    public void resetGame(){
+        pageCount = -1;
+        currentURL = "";
+        startingURL = "";
+        target_URL = "";
+        target_URL_full = "";
+        list_URL.clear();
+        gameStart = false;
+        gameRun = false; // might be the same as gameStart
+        peekMode = false; // toggles when the user is playing or looking at target
+        backSwitch = true;
+        mWebView.loadUrl("http://en.wikipedia.org/wiki/Special:Random");
+    }
+
+
+
+    private void loadPop(){
         final Button btnOpenPopup = (Button)findViewById(R.id.openpopup);
         btnOpenPopup.setOnClickListener(new Button.OnClickListener(){
-
             @Override
             public void onClick(View arg0) {
-
                 Util.playWavSound(getApplicationContext(), "select");
-
                 LayoutInflater layoutInflater
                         = (LayoutInflater)getBaseContext()
                         .getSystemService(LAYOUT_INFLATER_SERVICE);
                 View popupView = layoutInflater.inflate(R.layout.popup, null);
-
                 final PopupWindow popupWindow = new PopupWindow(
                         popupView,
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT);
-
                 Button btnDismiss = (Button)popupView.findViewById(R.id.dismiss);
                 btnDismiss.setOnClickListener(new Button.OnClickListener(){
-
                     @Override
                     public void onClick(View v) {
-                        // TODO Auto-generated method stub
+// TODO Auto-generated method stub
                         popupWindow.dismiss();
-
                         Util.playWavSound(getApplicationContext(), "wrong");
-
                     }});
-                //can be any resource apparently
+                Button reset = (Button)popupView.findViewById(R.id.pop_restart);
+                reset.setOnClickListener(new Button.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        resetGame();
+                    }
+                });
+//can be any resource apparently
                 popupWindow.showAtLocation(findViewById(R.id.browser_webView_Text) ,
                         Gravity.CENTER, 0, 0);
             }});
     }
+
+
+
+    private void changeUserText() {
+        TextView userLogin = (TextView) findViewById(R.id.mainuserstatus);
+        ParseUser current = ParseUser.getCurrentUser();
+        if (current != null) {
+            userLogin.setText("Logged in as:  " + Util.currentUserString(current) + " ");
+        } else {
+            userLogin.setText("Not Logged In");
+        }
+    }
+
+
+
+
+
+
 
     //Removes Web Client default buttons and bounds the browser space to
     //our WebView activity.

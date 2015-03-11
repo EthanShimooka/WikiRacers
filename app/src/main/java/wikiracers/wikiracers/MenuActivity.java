@@ -9,9 +9,11 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.Parse;
+import com.parse.ParseUser;
 
 
 /**
@@ -95,6 +97,10 @@ public class MenuActivity extends Activity {
             }
         });
 
+
+
+        //Sets logged-in Status on main page
+        changeUserText();
 
 
     }
@@ -184,6 +190,33 @@ public class MenuActivity extends Activity {
     }
 
 
+
+
+    // currentUserString()
+    // Fetches name of currently logged in account. Uses Parse() getCurrentUser() getUsername()
+
+/*
+private String currentUserString(ParseUser currentUser) {
+    String currentUserString;
+
+    currentUserString = currentUser.getUsername();
+    return currentUserString;
+}
+*/
+
+
+
+
+
+  private void changeUserText() {
+    TextView userLogin = (TextView) findViewById(R.id.mainuserstatus);
+    ParseUser current = ParseUser.getCurrentUser();
+      if (current != null) {
+        userLogin.setText("Welcome " + Util.currentUserString(current) + "!");
+      } else {
+         userLogin.setText("Not Logged In");
+      }
+    }
 
     //haveNetworkConnection() Check that there is an active internet connection with either wiFi or
     // cellular connection.

@@ -10,9 +10,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Build"
-        android:id="@+id/browser_webView_Header"
-        android:textSize="12sp"
+        android:text="@string/maintextvalueuser"
+        android:id="@+id/mainuserstatus"
+        android:textSize="15sp"
         />
 
 
@@ -62,7 +62,17 @@
             android:id="@+id/settings_button"
             android:layout_gravity="center_horizontal" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/maintextvalueuser"
+            android:id="@+id/mainuserstatus"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp" />
+
         />
+
+
 
 
     </LinearLayout>
