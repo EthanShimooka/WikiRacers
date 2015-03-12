@@ -4,8 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_theme_dark"
     android:baselineAligned="false"
-    android:id="@+id/menu_layout"
-    android:alpha=".7">
+    android:id="@+id/menu_layout">
 
     <TextView
         android:layout_width="wrap_content"

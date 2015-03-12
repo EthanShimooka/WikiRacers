@@ -267,7 +267,7 @@ public class WebBrowser extends Activity {
                 btnDismiss.setOnClickListener(new Button.OnClickListener(){
                     @Override
                     public void onClick(View v) {
-// TODO Auto-generated method stub
+
                         popupWindow.dismiss();
                         Util.playWavSound(getApplicationContext(), "wrong");
                     }});
@@ -276,8 +276,21 @@ public class WebBrowser extends Activity {
                     @Override
                     public void onClick(View v) {
                         resetGame();
+                        Util.playWavSound(getApplicationContext(), "select");
+
                     }
                 });
+
+
+                Button menu = (Button)popupView.findViewById(R.id.pop_settings);
+                menu.setOnClickListener(new Button.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+                        Util.playWavSound(getApplicationContext(), "select");
+                    }
+                });
+
 //can be any resource apparently
                 popupWindow.showAtLocation(findViewById(R.id.browser_webView_Text) ,
                         Gravity.CENTER, 0, 0);

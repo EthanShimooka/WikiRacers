@@ -85,6 +85,56 @@ public class MenuActivity extends Activity {
             }
         });
 
+
+
+
+
+        Button shareButton = (Button) findViewById(R.id.share_button);
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View v){
+                Util.playWavSound(getApplicationContext(), "select");
+
+                String userscore = "";
+                ParseUser current = ParseUser.getCurrentUser();
+
+                if (current != null) {
+                   Integer totalWins = current.getInt("numFinishedGames");
+
+                   userscore = totalWins.toString();
+
+                    Intent shareIntent=new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+
+                    if (totalWins <= 1) {
+                        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "I have " + userscore + " win in WikiRacers!");
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, "I have " + userscore + " win in WikiRacers! Try and beat my score at one of the most intuitive puzzle games yet! Now available on Android!");
+
+                    }else{
+                        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "I have over " + userscore + " wins in WikiRacers! Impressive, no?");
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, "I have over " + userscore + " wins in WikiRacers! Try and beat my score at one of the most intuitive puzzle games yet! Now available on Android!");
+
+                    }
+                    startActivity(Intent.createChooser(shareIntent, "Share..."));
+
+                } else {
+                    Context contexts = getApplicationContext();
+                    CharSequence texts = "Not logged in";
+                    int duration = Toast.LENGTH_LONG;
+                    Toast toasts = Toast.makeText(contexts, texts, duration);
+                    toasts.show();
+
+                }
+            }
+        });
+
+
+
+
+
+
+
+
+
         Button settingButton = (Button) findViewById(R.id.settings_button);
         settingButton.setOnClickListener(new View.OnClickListener() {
             public void onClick (View v){
