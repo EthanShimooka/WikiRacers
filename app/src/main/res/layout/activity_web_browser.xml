@@ -36,7 +36,7 @@
             <TextView
                 android:id="@+id/browser_webView_Text"
                 android:layout_width="230dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:text="@string/webview_target_url"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
@@ -47,10 +47,9 @@
                 android:layout_alignParentStart="true"
                 android:clickable="true"
                 android:maxWidth="250dp"
-                android:background="#ffffe3f5"
+                android:background="#ff3647ff"
                 android:layout_marginTop="8dp"
                 android:layout_marginLeft="5dp"
-                android:backgroundTint="#ff3647ff"
                 android:alpha=".81"
                 android:autoText="true" />
 
@@ -61,7 +60,7 @@
                 style="?android:attr/borderlessButtonStyle"
 
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
@@ -72,7 +71,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/browser_webView_Text"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="5dp"
                 android:layout_toLeftOf="@+id/openpopup"
                 android:layout_toStartOf="@+id/openpopup" />
@@ -80,7 +79,7 @@
             <Button
                 android:id="@+id/openpopup"
                 android:layout_width="40dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 style="?android:attr/borderlessButtonStyle"
                 android:background="@drawable/button_pause"
                 android:nestedScrollingEnabled="false"
@@ -90,7 +89,7 @@
                 android:visibility="visible"
                 android:width="50dp"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginRight="5dp" />
 
