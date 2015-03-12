@@ -38,7 +38,7 @@ public class FriendPage extends Activity{
             @Override
             public void onClick(View view){
                 if (view == addFriendBttn){
-                    Toast.makeText(getApplicationContext(), (findFriendText.getText() + " lookinh"),Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), (findFriendText.getText() + " looking"),Toast.LENGTH_LONG).show();
 
                     ParseQuery<ParseObject> query = ParseQuery.getQuery("_User");
                     String name = findFriendText.getText().toString();
