@@ -22,11 +22,6 @@ import com.parse.ParseUser;
  * Project : WikiRacers
  * =========================================
  *
-<<<<<<< HEAD
- * TODO: PLEASE READ OVER THE COMMENTS FOR EACH CLASS
- *
-=======
->>>>>>> d2d7456361245f8b46b75d161752f3269154b15b
  * Messages:
  *
  * 2/15/2015
