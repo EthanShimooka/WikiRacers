@@ -36,7 +36,7 @@ public class UserPage extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_page);
 
-        ParseUser currentUser = ParseUser.getCurrentUser();
+        final ParseUser currentUser = ParseUser.getCurrentUser();
         String username = currentUser.getString("username");
         String name = currentUser.getString("name");
         String email = currentUser.getString("email");
@@ -140,12 +140,7 @@ public class UserPage extends Activity {
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                final ProgressDialog dlg = new ProgressDialog(UserPage.this);
-                                dlg.setTitle("Logging out...");
-                                dlg.setMessage("Please wait...");
-                                dlg.show();
                                 ParseUser.logOut();
-                                dlg.dismiss();
                                 startActivity(new Intent(UserPage.this, SettingsPage.class));
                             }
                         })
@@ -167,6 +162,23 @@ public class UserPage extends Activity {
         findViewById(R.id.add_friend_button).setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
                 startActivity(new Intent(UserPage.this, FriendPage.class));
+            }});
+
+        //delete account button
+        findViewById(R.id.delete_account_button).setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                new AlertDialog.Builder(UserPage.this)
+                        .setMessage("Are you sure you want to delete your account?\nAll personal data will be removed from our servers.")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                              currentUser.deleteInBackground();
+                              ParseUser.logOut();
+                              startActivity(new Intent(UserPage.this, SettingsPage.class));
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
             }});
     }
 }

@@ -195,18 +195,27 @@
 
         <Button
             android:id="@+id/add_friend_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
-            android:layout_marginEnd="30dp"
+            android:layout_width="100dp"
+            android:layout_height="53dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             android:text="@string/add_friend_text" />
         <Button
             android:id="@+id/main_menu_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="53dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_toRightOf="@+id/add_friend_button"
             android:layout_toEndOf="@+id/add_friend_button"
             android:text="@string/main_menu_button_text" />
+        <Button
+            android:id="@+id/delete_account_button"
+            android:layout_width="100dp"
+            android:layout_height="53dp"
+            android:layout_toRightOf="@+id/main_menu_button"
+            android:layout_toEndOf="@+id/main_menu_button"
+            android:text="Delete Account" />
 
         </RelativeLayout>
 
