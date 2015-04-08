@@ -34,8 +34,25 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/target_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Target: "
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:maxWidth="250dp"
+                android:background="#ff3647ff"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="5dp"
+                android:alpha=".81"
+                android:autoText="true" />
+
+            <TextView
                 android:id="@+id/browser_webView_Text"
-                android:layout_width="410dp"
+                android:layout_width="375dp"
                 android:layout_height="wrap_content"
                 android:text="@string/webview_target_url"
                 android:paddingRight="@dimen/activity_horizontal_margin"
@@ -43,13 +60,12 @@
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
+                android:layout_toRightOf="@id/target_text"
+                android:layout_toEndOf="@+id/target_text"
                 android:clickable="true"
                 android:maxWidth="250dp"
                 android:background="#ff3647ff"
                 android:layout_marginTop="8dp"
-                android:layout_marginLeft="5dp"
                 android:alpha=".81"
                 android:autoText="true" />
 
@@ -58,7 +74,6 @@
             <Button
                 android:id="@+id/browser_webView_Back_Button"
                 style="?android:attr/borderlessButtonStyle"
-
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingBottom="@dimen/activity_vertical_margin"

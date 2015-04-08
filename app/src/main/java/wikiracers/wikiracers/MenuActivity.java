@@ -1,14 +1,20 @@
 package wikiracers.wikiracers;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.TransitionDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,12 +51,10 @@ public class MenuActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_layout);
 
-
         if (haveNetworkConnection() == false) {
             Context context = getApplicationContext();
             CharSequence text = "Network Unavailable!";
             int duration = Toast.LENGTH_LONG;
-
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
         }
@@ -59,90 +63,54 @@ public class MenuActivity extends Activity {
         //Parse.enableLocalDatastore(this);
         Parse.initialize(this, "pUt8rvMtRcdgXu3PMpyLyjbxkTIA4xEeVEJ4C1hp", "P7dA3hQGSO8NpuCODjgzJFH1F7ADn487syS55FBq");
 
-
-
-
-        //ParseObject testObject = new ParseObject("TestObject");
-        //testObject.put("foo", "bar");
-        //testObject.saveInBackground();
-
         Button menuButton = (Button) findViewById(R.id.menu_button);
         menuButton.setOnClickListener(new View.OnClickListener() {
             public void onClick (View v){
-
                 //Call to new browser Activity, when button is pressed.
                 //Todo: fix error regarding pressing back arrow button (<|) when playing game
                 startActivity(new Intent(getApplicationContext(), WebBrowser.class));
-
-
                 Util.playWavSound(getApplicationContext(), "select");
-
             }
         });
-
-
-
-
 
         Button shareButton = (Button) findViewById(R.id.share_button);
         shareButton.setOnClickListener(new View.OnClickListener() {
             public void onClick (View v){
                 Util.playWavSound(getApplicationContext(), "select");
-
                 String userscore = "";
                 ParseUser current = ParseUser.getCurrentUser();
-
                 if (current != null) {
                    Integer totalWins = current.getInt("numFinishedGames");
-
                    userscore = totalWins.toString();
-
                     Intent shareIntent=new Intent(Intent.ACTION_SEND);
                     shareIntent.setType("text/plain");
-
                     if (totalWins <= 1) {
                         shareIntent.putExtra(Intent.EXTRA_SUBJECT, "I have " + userscore + " win in WikiRacers!");
                         shareIntent.putExtra(Intent.EXTRA_TEXT, "I have " + userscore + " win in WikiRacers! Try and beat my score at one of the most intuitive puzzle games yet! Now available on Android!");
-
                     }else{
                         shareIntent.putExtra(Intent.EXTRA_SUBJECT, "I have over " + userscore + " wins in WikiRacers! Impressive, no?");
                         shareIntent.putExtra(Intent.EXTRA_TEXT, "I have over " + userscore + " wins in WikiRacers! Try and beat my score at one of the most intuitive puzzle games yet! Now available on Android!");
-
                     }
                     startActivity(Intent.createChooser(shareIntent, "Share..."));
-
                 } else {
                     Context contexts = getApplicationContext();
                     CharSequence texts = "Not logged in";
                     int duration = Toast.LENGTH_LONG;
                     Toast toasts = Toast.makeText(contexts, texts, duration);
                     toasts.show();
-
                 }
             }
         });
 
-
-
-
-
-
-
-
-
         Button settingButton = (Button) findViewById(R.id.settings_button);
         settingButton.setOnClickListener(new View.OnClickListener() {
             public void onClick (View v){
-
                 Util.playWavSound(getApplicationContext(), "select");
-
                 //Call to new browser Activity, when button is pressed.
                 //Todo: fix error regarding pressing back arrow button (<|) when playing game
                 startActivity(new Intent(getApplicationContext(), SettingsPage.class));
             }
         });
-
-
 
         //Sets logged-in Status on main page
         changeUserText();

@@ -67,21 +67,19 @@ public class WebBrowser extends Activity {
     static Boolean gameRun = false; // might be the same as gameStart
     static Boolean peekMode = false; // toggles when the user is playing or looking at target
     static Boolean backSwitch = true; //acts as a switch for the back button (prevents spamming)
+    static Boolean gameBegun = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         //Determine screen size
         if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE) {
-            //Toast.makeText(this, "Large screen", Toast.LENGTH_LONG).show();
             setContentView(R.layout.activity_web_browser_large);
         }
         else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
-            //Toast.makeText(this, "Normal sized screen", Toast.LENGTH_LONG).show();
             setContentView(R.layout.activity_web_browser);
         }
         else {
-            //Toast.makeText(this, "Screen size is neither large, normal or small", Toast.LENGTH_LONG).show();
             setContentView(R.layout.activity_web_browser);
         }
         final TextView countText = (TextView) findViewById(R.id.countView2);
@@ -124,7 +122,13 @@ public class WebBrowser extends Activity {
                         currentURL = url;
 
                         if(gameRun) {
-                            pageCount++;
+                            if(!url.equals("http://en.m.wikipedia.org/wiki/Special:Random")) {
+                                if(gameBegun) {
+                                    pageCount++;
+                                }else{
+                                    gameBegun = true;
+                                }
+                            }
 
                             if (list_URL.contains(currentURL) == false)
                                Util.playWavSound(getApplicationContext(), "right");
